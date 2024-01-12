@@ -29,8 +29,15 @@
       <div class="card-body">
         <h5 class="card-title">Formulário de cadastro de produto</h5>
 
+        <!-- Alerta de sucesso (inicialmente oculto) -->
+        <div id="alertaSucesso" class="alert alert-success alert-dismissible fade show" role="alert"   style="display: none;">
+          <i class="bi bi-check-circle me-1"></i>
+          Produto salvo com sucesso!
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
         <!-- Multi Columns Form -->
-        <form class="row g-3" >
+        <form class="row g-3" id="meuFormulario">
           <div class="col-md-12">
             <label for="descricao" class="form-label">Produto descrição</label>
             <input type="text" class="form-control" id="descricao" name="descricao">
@@ -64,37 +71,30 @@
             </div>
           </div>
           <div class="text-center">
-            <button type="button" class="btn btn-primary"  onclick="enviarFormulario()" >Salvar</button>
+            <button type="button" class="btn btn-primary"  onclick="enviarFormulario()" id="meuBotaoDeSalvar" >Salvar</button>
             <button type="reset" class="btn btn-secondary">Cancelar</button>
           </div>
         </form><!-- End Multi Columns Form -->
         <!-- Example Code -->
 
-<!--        inicio -->
-        <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+<!--&lt;!&ndash;toast &ndash;&gt;-->
+<!--        <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>-->
 
-        <div class="toast-container position-fixed top-0 end-0 p-3">
-          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            
-            <div class="toast-header">
-              <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
-              <strong class="me-auto">AQUI</strong>
-              <small>11 mins ago</small>
-              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-             s
-            </div>
-          </div>
-        </div>
-
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <i class="bi bi-check-circle me-1"></i>
-          A simple success alert with icon—check it out!
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-<!--        fim -->
+<!--        <div class="toast-container position-fixed top-0 end-0 p-3">-->
+<!--          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">-->
+<!--            -->
+<!--            <div class="toast-header">-->
+<!--              <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>-->
+<!--              <strong class="me-auto">AQUI</strong>-->
+<!--              <small>11 mins ago</small>-->
+<!--              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="toast-body">-->
+<!--             s-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--&lt;!&ndash;toast &ndash;&gt;-->
 
 
       </div>
