@@ -74,25 +74,21 @@
         <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
 
         <div class="toast-container position-fixed top-0 end-0 p-3">
-          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div id="liveToast" class=" " role="alert" aria-live="assertive" aria-atomic="true">
             
-            <div class="toast-header">
+            <div class="alert alert-success alert-dismissible fade show">
               <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
               <strong class="me-auto">AQUI</strong>
               <small>11 mins ago</small>
               <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-            <div class="toast-body">
-             s
-            </div>
+
           </div>
         </div>
 
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <i class="bi bi-check-circle me-1"></i>
-          A simple success alert with icon—check it out!
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        <button type="button" class="btn btn-success toastsDefaultSuccess">
+          Launch Success Toast
+        </button>
 
 <!--        fim -->
 
@@ -205,6 +201,17 @@ toastTrigger.addEventListener('click', () => {
 toastBootstrap.show()
 })
 }
+</script>
+
+<script>
+  $('.toastsDefaultSuccess').click(function() {
+     $(document).Toasts('create', {
+       class: 'bg-success',
+       title: 'Toast Title',
+       subtitle: 'Subtitle',
+       body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+     })
+   });
 </script>
 
 </body>
