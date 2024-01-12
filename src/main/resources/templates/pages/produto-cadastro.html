@@ -1,0 +1,204 @@
+<!-- src/main/resources/templates/hello.html -->
+
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<!-- Incluindo o fragmento de head -->
+<th:block th:replace="fragments/head"></th:block>
+<body>
+<!-- Incluindo o fragmento de cabeçalho -->
+<th:block th:replace="fragments/header"></th:block>
+
+<!-- Incluindo o fragmento de sidebar -->
+<th:block th:replace="fragments/sidebar"></th:block>
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Cadastro de produto</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Produto</li>
+        <li class="breadcrumb-item active">Cadastro</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Formulário de cadastro de produto</h5>
+
+        <!-- Multi Columns Form -->
+        <form class="row g-3" >
+          <div class="col-md-12">
+            <label for="descricao" class="form-label">Produto descrição</label>
+            <input type="text" class="form-control" id="descricao" name="descricao">
+          </div>
+          <div class="col-md-6">
+            <label for="unidade" class="form-label">Unidade</label>
+            <input type="text" class="form-control" id="unidade" name="unidade">
+          </div>
+          <div class="col-md-6">
+            <label for="preco" class="form-label">Preço</label>
+            <input type="number" class="form-control" id="preco" name="preco" step="0.0001" pattern="\d+(\.\d{1,2})?" title="Informe um valor numérico com até duas casas decimais">
+
+            <!--            <input type="number" class="form-control" id="preco">-->
+          </div>
+          <div class="col-md-6">
+          <label for="ncm" class="form-label">Ncm</label>
+            <input type="number" class="form-control" id="ncm" name="ncm">
+        </div>
+
+          <div class="col-12">
+            <label for="observacao" class="form-label">Observação</label>
+            <textarea class="form-control" placeholder="observação" id="observacao" name="observacao" style="height: 100px;"></textarea>
+          </div>
+
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck" checked>
+              <label class="form-check-label" for="gridCheck">
+               Ativo
+              </label>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="button" class="btn btn-primary"  onclick="enviarFormulario()" >Salvar</button>
+            <button type="reset" class="btn btn-secondary">Cancelar</button>
+          </div>
+        </form><!-- End Multi Columns Form -->
+        <!-- Example Code -->
+
+<!--        inicio -->
+        <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+              <strong class="me-auto">AQUI</strong>
+              <small>11 mins ago</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              Hello, world! This is a toast message.
+            </div>
+          </div>
+        </div>
+
+<!--        fim -->
+
+
+      </div>
+
+      <!-- End Example Code -->
+
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+
+
+
+<!-- Incluindo o fragmento de footer -->
+<th:block th:replace="fragments/footer"></th:block>
+
+<a       href="#"
+        class="back-to-top d-flex align-items-center justify-content-center"
+><i class="bi bi-arrow-up-short"></i
+></a>
+
+<!-- Incluindo o fragmento de script -->
+<th:block th:replace="fragments/script"></th:block>
+
+
+
+<!--<script>-->
+<!--  function enviarFormulario() {-->
+<!--      var formData = {-->
+<!--          preco: $("#preco").val(),-->
+<!--      };-->
+
+<!--      $.ajax({-->
+<!--          url: "/api/produtos",-->
+<!--          type: "POST",-->
+<!--          contentType: "application/json",-->
+<!--          data: JSON.stringify(formData),-->
+<!--          success: function (response) {-->
+<!--          },-->
+<!--          error: function (error) {-->
+<!--          }-->
+<!--      });-->
+<!--  }-->
+<!--</script>-->
+
+
+
+<!--<script>-->
+<!--  document.addEventListener('DOMContentLoaded', function () {-->
+<!--      document.querySelector('form').addEventListener('submit', function (event) {-->
+<!--          event.preventDefault(); // Impede o envio padrão do formulário-->
+
+<!--          // Coleta os valores dos campos do formulário-->
+<!--          var descricao = document.getElementById('descricao').value;-->
+<!--          var unidade = document.getElementById('unidade').value;-->
+<!--          var preco = document.getElementById('preco').value;-->
+<!--          var ncm = document.getElementById('ncm').value;-->
+<!--          var observacao = document.getElementById('observacao').value;-->
+<!--          var ativo = document.getElementById('gridCheck').checked;-->
+
+<!--          // Cria um objeto JSON com os dados do formulário-->
+<!--          var formData = {-->
+<!--              descricao: descricao,-->
+<!--              unidade: unidade,-->
+<!--              preco: preco,-->
+<!--              ncm: ncm,-->
+<!--              observacao: observacao,-->
+<!--              ativo: ativo-->
+<!--          };-->
+
+<!--          // Envia a requisição para o servidor-->
+<!--          fetch('/api/produtos', {-->
+<!--              method: 'POST',-->
+<!--              headers: {-->
+<!--                  'Content-Type': 'application/json'-->
+<!--              },-->
+<!--              body: JSON.stringify(formData)-->
+<!--          })-->
+<!--          .then(response => {-->
+<!--              if (!response.ok) {-->
+<!--                  throw new Error('Erro ao enviar os dados');-->
+<!--              }-->
+<!--              // Lógica de sucesso, redirecionamento ou outra ação necessária-->
+<!--          })-->
+<!--          .catch(error => {-->
+<!--              console.error('Erro:', error);-->
+<!--              // Lógica de tratamento de erro-->
+<!--          });-->
+<!--      });-->
+<!--  });-->
+<!--</script>-->
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+
+<th:block th:replace="fragments/script-produto"></th:block>
+
+<script>
+
+  const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+
+if (toastTrigger) {
+const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+toastTrigger.addEventListener('click', () => {
+toastBootstrap.show()
+})
+}
+</script>
+
+</body>
+</html>
