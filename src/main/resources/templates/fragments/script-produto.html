@@ -1,0 +1,29 @@
+<div>
+
+    <script>
+        function enviarFormulario() {
+        console.log('aqui');
+            var formData = {
+                descricao: $("#descricao").val(),
+                unidade: $("#unidade").val(),
+                preco: $("#preco").val(),
+                ncm: $("#ncm").val(),
+                observacao: $("#observacao").val(),
+                ativo: $("#gridCheck").prop("checked")
+            };
+
+            $.ajax({
+                url: '/api/produtos',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+               console.log('sucesso');
+                },
+                error: function (error) {
+                    console.error('Erro:', error);
+                }
+            });
+        }
+    </script>
+</div>

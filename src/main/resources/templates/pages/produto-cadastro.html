@@ -33,26 +33,26 @@
         <form class="row g-3" >
           <div class="col-md-12">
             <label for="descricao" class="form-label">Produto descrição</label>
-            <input type="text" class="form-control" id="descricao">
+            <input type="text" class="form-control" id="descricao" name="descricao">
           </div>
           <div class="col-md-6">
             <label for="unidade" class="form-label">Unidade</label>
-            <input type="text" class="form-control" id="unidade">
+            <input type="text" class="form-control" id="unidade" name="unidade">
           </div>
           <div class="col-md-6">
             <label for="preco" class="form-label">Preço</label>
-            <input type="number" class="form-control" id="preco" step="0.0001" pattern="\d+(\.\d{1,2})?" title="Informe um valor numérico com até duas casas decimais">
+            <input type="number" class="form-control" id="preco" name="preco" step="0.0001" pattern="\d+(\.\d{1,2})?" title="Informe um valor numérico com até duas casas decimais">
 
             <!--            <input type="number" class="form-control" id="preco">-->
           </div>
           <div class="col-md-6">
           <label for="ncm" class="form-label">Ncm</label>
-            <input type="number" class="form-control" id="ncm">
+            <input type="number" class="form-control" id="ncm" name="ncm">
         </div>
 
           <div class="col-12">
             <label for="observacao" class="form-label">Observação</label>
-            <textarea class="form-control" placeholder="observação" id="observacao" style="height: 100px;"></textarea>
+            <textarea class="form-control" placeholder="observação" id="observacao" name="observacao" style="height: 100px;"></textarea>
           </div>
 
           <div class="col-12">
@@ -64,16 +64,41 @@
             </div>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-primary"  onclick="enviarFormulario()" >Salvar</button>
+            <button type="button" class="btn btn-primary"  onclick="enviarFormulario()" >Salvar</button>
             <button type="reset" class="btn btn-secondary">Cancelar</button>
           </div>
         </form><!-- End Multi Columns Form -->
+        <!-- Example Code -->
+
+<!--        inicio -->
+        <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+              <strong class="me-auto">AQUI</strong>
+              <small>11 mins ago</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              Hello, world! This is a toast message.
+            </div>
+          </div>
+        </div>
+
+<!--        fim -->
+
 
       </div>
+
+      <!-- End Example Code -->
+
     </div>
   </section>
 </main>
 <!-- End #main -->
+
 
 
 
@@ -90,28 +115,24 @@
 
 
 
-<script>
-  function enviarFormulario() {
-      var formData = {
-          // Obtenha os dados do formulário
-          preco: $("#preco").val(),
-          // Adicione outros campos do formulário, se necessário
-      };
+<!--<script>-->
+<!--  function enviarFormulario() {-->
+<!--      var formData = {-->
+<!--          preco: $("#preco").val(),-->
+<!--      };-->
 
-      $.ajax({
-          url: "/salvar-produto",
-          type: "POST",
-          contentType: "application/json",
-          data: JSON.stringify(formData),
-          success: function (response) {
-              // Lógica de sucesso
-          },
-          error: function (error) {
-              // Lógica de erro
-          }
-      });
-  }
-</script>
+<!--      $.ajax({-->
+<!--          url: "/api/produtos",-->
+<!--          type: "POST",-->
+<!--          contentType: "application/json",-->
+<!--          data: JSON.stringify(formData),-->
+<!--          success: function (response) {-->
+<!--          },-->
+<!--          error: function (error) {-->
+<!--          }-->
+<!--      });-->
+<!--  }-->
+<!--</script>-->
 
 
 
@@ -160,7 +181,24 @@
 <!--  });-->
 <!--</script>-->
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+
+
+<th:block th:replace="fragments/script-produto"></th:block>
+
+<script>
+
+  const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+
+if (toastTrigger) {
+const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+toastTrigger.addEventListener('click', () => {
+toastBootstrap.show()
+})
+}
+</script>
 
 </body>
 </html>
