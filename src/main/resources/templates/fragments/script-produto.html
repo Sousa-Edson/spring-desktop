@@ -19,6 +19,9 @@
                 data: JSON.stringify(formData),
                 success: function (response) {
                console.log('sucesso');
+               bloquearBotaoLimparCampos();
+               exibirAlerta();
+
                 },
                 error: function (error) {
                     console.error('Erro:', error);
@@ -26,4 +29,48 @@
             });
         }
     </script>
+
+
+
+
+
+<!-- Seu script para exibir o alerta após o salvamento -->
+<script>
+    // Função para exibir o alerta de sucesso
+    function exibirAlerta() {
+        $('#alertaSucesso').fadeIn().delay(3000).fadeOut(); // Exibe o alerta por 3 segundos e depois o oculta
+    }
+  
+    // Simulação de salvamento bem-sucedido (chame isso quando a operação de salvamento for bem-sucedida)
+    // function simularSalvamentoBemSucedido() {
+    //     // Aqui você pode adicionar a lógica real de salvamento do produto
+    //     // Por enquanto, só estamos chamando a função para exibir o alerta
+    //     exibirAlerta();
+    // }
+  
+    // // Chame a função de simulação de salvamento bem-sucedido após um evento de clique (simulando um salvamento)
+    // $('#meuBotaoDeSalvar').on('click', function () {
+    //     simularSalvamentoBemSucedido();
+    // });
+  
+    // Se você quiser mostrar o formulário depois do salvamento (outras opções podem ser implementadas conforme necessário)
+    // Comente a linha abaixo se você quiser manter o formulário oculto após o salvamento
+    // $('#meuFormulario').show();
+  </script>
+
+  <script>
+     // Função para bloquear o botão e limpar os campos após o salvamento
+     function bloquearBotaoLimparCampos() {
+        // Bloqueia o botão
+        $('#meuBotaoDeSalvar').prop('disabled', true);
+
+        // Limpa os campos do formulário
+        $('#meuFormulario :input').val('');
+
+        // Desbloqueia o botão após 3 segundos (você pode ajustar o tempo conforme necessário)
+        setTimeout(function () {
+            $('#meuBotaoDeSalvar').prop('disabled', false);
+        }, 3000);
+    }
+  </script>
 </div>
