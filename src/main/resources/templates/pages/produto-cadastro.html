@@ -1,0 +1,166 @@
+<!-- src/main/resources/templates/hello.html -->
+
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<!-- Incluindo o fragmento de head -->
+<th:block th:replace="fragments/head"></th:block>
+<body>
+<!-- Incluindo o fragmento de cabeçalho -->
+<th:block th:replace="fragments/header"></th:block>
+
+<!-- Incluindo o fragmento de sidebar -->
+<th:block th:replace="fragments/sidebar"></th:block>
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Cadastro de produto</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Produto</li>
+        <li class="breadcrumb-item active">Cadastro</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Formulário de cadastro de produto</h5>
+
+        <!-- Multi Columns Form -->
+        <form class="row g-3" >
+          <div class="col-md-12">
+            <label for="descricao" class="form-label">Produto descrição</label>
+            <input type="text" class="form-control" id="descricao">
+          </div>
+          <div class="col-md-6">
+            <label for="unidade" class="form-label">Unidade</label>
+            <input type="text" class="form-control" id="unidade">
+          </div>
+          <div class="col-md-6">
+            <label for="preco" class="form-label">Preço</label>
+            <input type="number" class="form-control" id="preco" step="0.0001" pattern="\d+(\.\d{1,2})?" title="Informe um valor numérico com até duas casas decimais">
+
+            <!--            <input type="number" class="form-control" id="preco">-->
+          </div>
+          <div class="col-md-6">
+          <label for="ncm" class="form-label">Ncm</label>
+            <input type="number" class="form-control" id="ncm">
+        </div>
+
+          <div class="col-12">
+            <label for="observacao" class="form-label">Observação</label>
+            <textarea class="form-control" placeholder="observação" id="observacao" style="height: 100px;"></textarea>
+          </div>
+
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck" checked>
+              <label class="form-check-label" for="gridCheck">
+               Ativo
+              </label>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary"  onclick="enviarFormulario()" >Salvar</button>
+            <button type="reset" class="btn btn-secondary">Cancelar</button>
+          </div>
+        </form><!-- End Multi Columns Form -->
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+
+
+<!-- Incluindo o fragmento de footer -->
+<th:block th:replace="fragments/footer"></th:block>
+
+<a       href="#"
+        class="back-to-top d-flex align-items-center justify-content-center"
+><i class="bi bi-arrow-up-short"></i
+></a>
+
+<!-- Incluindo o fragmento de script -->
+<th:block th:replace="fragments/script"></th:block>
+
+
+
+<script>
+  function enviarFormulario() {
+      var formData = {
+          // Obtenha os dados do formulário
+          preco: $("#preco").val(),
+          // Adicione outros campos do formulário, se necessário
+      };
+
+      $.ajax({
+          url: "/salvar-produto",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(formData),
+          success: function (response) {
+              // Lógica de sucesso
+          },
+          error: function (error) {
+              // Lógica de erro
+          }
+      });
+  }
+</script>
+
+
+
+<!--<script>-->
+<!--  document.addEventListener('DOMContentLoaded', function () {-->
+<!--      document.querySelector('form').addEventListener('submit', function (event) {-->
+<!--          event.preventDefault(); // Impede o envio padrão do formulário-->
+
+<!--          // Coleta os valores dos campos do formulário-->
+<!--          var descricao = document.getElementById('descricao').value;-->
+<!--          var unidade = document.getElementById('unidade').value;-->
+<!--          var preco = document.getElementById('preco').value;-->
+<!--          var ncm = document.getElementById('ncm').value;-->
+<!--          var observacao = document.getElementById('observacao').value;-->
+<!--          var ativo = document.getElementById('gridCheck').checked;-->
+
+<!--          // Cria um objeto JSON com os dados do formulário-->
+<!--          var formData = {-->
+<!--              descricao: descricao,-->
+<!--              unidade: unidade,-->
+<!--              preco: preco,-->
+<!--              ncm: ncm,-->
+<!--              observacao: observacao,-->
+<!--              ativo: ativo-->
+<!--          };-->
+
+<!--          // Envia a requisição para o servidor-->
+<!--          fetch('/api/produtos', {-->
+<!--              method: 'POST',-->
+<!--              headers: {-->
+<!--                  'Content-Type': 'application/json'-->
+<!--              },-->
+<!--              body: JSON.stringify(formData)-->
+<!--          })-->
+<!--          .then(response => {-->
+<!--              if (!response.ok) {-->
+<!--                  throw new Error('Erro ao enviar os dados');-->
+<!--              }-->
+<!--              // Lógica de sucesso, redirecionamento ou outra ação necessária-->
+<!--          })-->
+<!--          .catch(error => {-->
+<!--              console.error('Erro:', error);-->
+<!--              // Lógica de tratamento de erro-->
+<!--          });-->
+<!--      });-->
+<!--  });-->
+<!--</script>-->
+
+
+
+</body>
+</html>
