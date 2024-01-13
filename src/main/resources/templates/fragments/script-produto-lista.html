@@ -1,0 +1,85 @@
+<script>
+    $(document).ready(function() {
+        var dadosOriginais; // Armazena os dados originais para restaurar a tabela após a pesquisa
+
+        // Fazer uma requisição à sua API
+        $.ajax({
+            url: '/api/produtos',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                dadosOriginais = data; // Armazena os dados originais
+                preencherTabela(data);
+                atualizarExibicaoTabela(data);
+            },
+            error: function (error) {
+                console.error('Erro na requisição à API:', error);
+            }
+        });
+
+        // Adiciona um ouvinte de eventos ao campo de pesquisa
+        $('#campoPesquisa').on('input', function () {
+            pesquisar();
+        });
+
+        function preencherTabela(dados) {
+            // Selecionar o corpo da tabela
+            var tbody = $('#tabelaDados tbody');
+            tbody.empty(); // Limpa o conteúdo atual da tabela
+
+            // Iterar sobre os dados e adicionar linhas à tabela
+            dados.forEach(function (dado) {
+                var row = $('<tr>');
+                row.append('<td scope="row"><a href="/produto/' + dado.id + '#">' + dado.id + '</a></td>');
+                row.append('<td>' + (dado.ativo ? '<span class="badge bg-success">Ativo</span>' : '<span class="badge bg-danger">Inativo</span>') + '</td>'); // Converte booleano para Sim/Não
+                row.append('<td>' + dado.unidade + '</td>');
+                row.append('<td><a href="/produto/' + dado.id + '" class="text-primary">' + dado.descricao + '</a></td>');
+
+                // Formatar o preço como "R$ 8,9000"
+                var precoFormatado = new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                  minimumFractionDigits: 4
+                }).format(dado.preco);
+                row.append('<td>' + precoFormatado + '</td>');
+
+                row.append('<td>' + dado.ncm + '</td>');
+                row.append('<td>' + (dado.observacao || '') + '</td>'); // Lidar com observacao nula
+                tbody.append(row);
+            });
+        }
+
+        function pesquisar() {
+            var termoPesquisa = $('#campoPesquisa').val().toLowerCase();
+            var dadosFiltrados = dadosOriginais.filter(function (item) {
+
+            // Formatar o preço durante a filtragem
+            item.precoFormatado = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 4
+             }).format(item.preco);
+
+                return (
+                    item.id.toString().includes(termoPesquisa) ||
+                    item.unidade.toLowerCase().includes(termoPesquisa) ||
+                    item.descricao.toLowerCase().includes(termoPesquisa) ||
+                    item.precoFormatado.includes(termoPesquisa) || // Utilize o preço formatado na pesquisa
+                     item.ncm.includes(termoPesquisa) ||
+                    item.ncm.includes(termoPesquisa) ||
+                    (item.observacao && item.observacao.toLowerCase().includes(termoPesquisa)) ||
+                     (item.ativo ? 'ativo' : 'inativo').includes(termoPesquisa) // Incluído condição para "ativo" ou "inativo"
+                     );
+            });
+            preencherTabela(dadosFiltrados);
+            atualizarExibicaoTabela(dadosFiltrados);
+        }
+
+        function atualizarExibicaoTabela(dados) {
+            var tabelaVazia = dados.length === 0;
+            $('#tabelaDados').toggle(!tabelaVazia);
+            $('#mensagemTabelaVazia').toggle(tabelaVazia);
+        }
+    });
+
+</script>

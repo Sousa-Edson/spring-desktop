@@ -1,0 +1,108 @@
+<!-- src/main/resources/templates/hello.html -->
+
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<!-- Incluindo o fragmento de head -->
+<th:block th:replace="~{fragments/head}"></th:block>
+<body>
+<!-- Incluindo o fragmento de cabeçalho -->
+<th:block th:replace="~{fragments/header}"></th:block>
+
+<!-- Incluindo o fragmento de sidebar -->
+<th:block th:replace="~{fragments/sidebar}"></th:block>
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Lista de produto</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Produto</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <section class="section">
+
+
+        <!-- Recent Sales -->
+        <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+
+
+                <div class="card-body">
+                    <h5 class="card-title">Produtos <span>| recentes</span></h5>
+                    <div class="col-10 container">
+                        <div class="row">
+
+                            <div class=" col-2">
+                                <a class="btn btn-primary mt-2" th:href="@{/produto/cadastro}"><i
+                                        class="ri-add-circle-line "> Novo</i> </a>
+                            </div>
+
+                            <div class=" col-9 ">
+                                <div class="input-group  ">
+
+                                    <input type="text" class="form-control" placeholder="digite sua persquisa"
+                                           aria-describedby="inputGroupPrepend" id="campoPesquisa" autofocus>
+                                    <div class="invalid-feedback">
+                                        Please choose a username.
+                                    </div>
+                                    <a class=" input-group-text btn btn-primary" href="#"><i
+                                            class="ri-search-eye-line"> Pesquisar</i> </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <table class="table table-borderless table-hover " id="tabelaDados">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Unidade</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Preço</th>
+                            <th scope="col">NCM</th>
+                            <th scope="col">Observação</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                    <div id="mensagemTabelaVazia" class="text-center mt-5">
+                        <!-- Mensagem para exibir quando a tabela estiver vazia -->
+                        Nenhum item para exibir.
+                    </div>
+
+                </div>
+
+            </div>
+        </div><!-- End Recent Sales -->
+
+    </section>
+</main>
+<!-- End #main -->
+
+
+<!-- Incluindo o fragmento de footer -->
+<th:block th:replace="~{fragments/footer}"></th:block>
+
+<a href="#"
+   class="back-to-top d-flex align-items-center justify-content-center"
+><i class="bi bi-arrow-up-short"></i
+></a>
+
+
+<!-- Incluindo o fragmento de script -->
+<th:block th:replace="~{fragments/script}"></th:block>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<th:block th:replace="~{fragments/script-produto-lista}"></th:block>
+</body>
+</html>

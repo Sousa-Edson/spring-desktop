@@ -1,28 +1,33 @@
 package com.edson.springdesktop.api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 @Entity
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-//    @NotBlank(message = "A unidade não pode estar em branco")
-//    @Size(min = 1, max = 50, message = "A unidade deve ter entre 1 e 50 caracteres")
+    @NotBlank(message = "A unidade não pode estar em branco")
+    @Size(min = 1, max = 50, message = "A unidade deve ter entre 1 e 50 caracteres")
     private String unidade;
 
-//    @NotBlank(message = "A descrição não pode estar em branco")
-//    @Size(min = 1, max = 255, message = "A descrição deve ter entre 1 e 255 caracteres")
+    @NotBlank(message = "A descrição não pode estar em branco")
+    @Size(min = 1, max = 255, message = "A descrição deve ter entre 1 e 255 caracteres")
     private String descricao;
 
-//    @NotNull(message = "O preço não pode ser nulo")
-    private Double preco; // Usando Double ao invés de double
+    @NotNull(message = "O preço não pode ser nulo")
+    private Double preco;
 
-    public Produto() {
-    }
+    @NotBlank(message = "O ncm não pode estar em branco")
+    @Size(min = 8, max = 8, message = "O ncm deve ter 8 caracteres")
+    private String ncm;
+    @Column(columnDefinition = "TEXT")
+    private String observacao;
+
+    private Boolean ativo;
 
     public Long getId() {
         return id;
@@ -37,7 +42,7 @@ public class Produto {
     }
 
     public void setUnidade(String unidade) {
-        this.unidade = unidade;
+        this.unidade = unidade.toUpperCase();
     }
 
     public String getDescricao() {
@@ -45,7 +50,7 @@ public class Produto {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.descricao = descricao.toUpperCase();
     }
 
     public Double getPreco() {
@@ -54,5 +59,29 @@ public class Produto {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    public String getNcm() {
+        return ncm;
+    }
+
+    public void setNcm(String ncm) {
+        this.ncm = ncm;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao.toUpperCase();
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 }

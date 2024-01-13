@@ -25,6 +25,12 @@ public class ProdutoService {
     }
 
     public Produto salvarProduto(Produto produto) {
+        if (produto.getAtivo() == null) {
+            produto.setAtivo(true);
+        }
+        if (produto.getObservacao() == null) {
+            produto.setObservacao("");
+        }
         return produtoRepository.save(produto);
     }
 
