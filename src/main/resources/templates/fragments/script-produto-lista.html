@@ -31,7 +31,7 @@
         tbody.empty();
 
         dados.forEach(function(dado) {
-            const row = $('<tr>');
+            const row = $('<tr class="align-middle">');
             row.append(`<td scope="row"><a href="/produto/${dado.id}">${dado.id}</a></td>`);
             row.append(`<td>${dado.ativo ? '<span class="badge bg-success">Ativo</span>' : '<span class="badge bg-danger">Inativo</span>'}</td>`);
             row.append(`<td>${dado.unidade}</td>`);
@@ -39,6 +39,18 @@
             row.append(`<td>${formatarPreco(dado.preco)}</td>`);
             row.append(`<td>${dado.ncm}</td>`);
             row.append(`<td>${dado.observacao || ''}</td>`);
+
+                // Coluna de botões
+            row.append(`
+                <td>
+                    <div class="btn-group" role="group" aria-label="Ações">
+                        <a href="" class="btn btn-outline-primary" onclick="editarProduto(${dado.id})">Editar</a>
+                        <a href="" class="btn btn-outline-primary" onclick="exibirProduto(${dado.id})">Exibir</a>
+                        <a href="" class="btn btn-outline-danger" onclick="deletarProduto(${dado.id})">Deletar</a>
+                    </div>
+                </td>
+            `);
+
             tbody.append(row);
         });
     }

@@ -11,7 +11,7 @@
 <!-- Incluindo o fragmento de sidebar -->
 <th:block th:replace="~{fragments/sidebar}"></th:block>
 
-<main id="main" class="main">
+<main id="main" class="main" style="height: 80vh; ">
     <div class="pagetitle">
         <h1>Cadastro de produto</h1>
         <nav>
@@ -56,13 +56,13 @@
                         <input type="text" class="form-control" id="unidade" name="unidade">
                         <span id="unidade-error" class="text-danger"> </span>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <label for="preco" class="form-label">Preço</label>
                         <input type="number" class="form-control" id="preco" name="preco" step="0.0001"
                                pattern="\d+(\.\d{1,2})?" title="Informe um valor numérico com até duas casas decimais">
                         <span id="preco-error" class="text-danger"> </span>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <label for="ncm" class="form-label">Ncm</label>
                         <input type="number" class="form-control" id="ncm" name="ncm">
                         <span id="ncm-error" class="text-danger"> </span>
