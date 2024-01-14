@@ -4,6 +4,7 @@ import com.edson.springdesktop.api.model.Produto;
 import com.edson.springdesktop.api.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +15,9 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
     public List<Produto> encontrarProdutosPorParteDoNome(String parteDoNome) {
-        return produtoRepository.findByDescricaoContaining(parteDoNome);
+        return produtoRepository.findByDescricaoContaining(parteDoNome.toUpperCase());
     }
+
     public List<Produto> listarProdutos() {
         return produtoRepository.findAll();
     }

@@ -14,10 +14,12 @@ public class ProdutoControllerView {
 
     @GetMapping("/cadastro")
     public String cadastro(Model model) {
+        model.addAttribute("menuAtivo", "menu2"); // Substitua "menu1" pelo ID do menu desejado
         return "pages/produto-cadastro";
     }
     @GetMapping
     public String lista(Model model) {
+        model.addAttribute("menuAtivo", "menu1"); // Substitua "menu1" pelo ID do menu desejado
         return "pages/produto-lista";
     }
 }

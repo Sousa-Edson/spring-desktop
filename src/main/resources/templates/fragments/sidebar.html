@@ -12,21 +12,21 @@
 
       <li class="nav-heading">Pages</li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" th:href="@{/produto}">
+      <li class="nav-item" id="menu1">
+        <a class="nav-link " th:href="@{/produto}"  th:classappend="${#strings.equals(menuAtivo, 'menu1')} ? '' : 'collapsed'">
           <i class="bi bi-person"></i>
           <span>Produtos</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" th:href="@{/produto/cadastro}">
+      <li class="nav-item" id="menu2">
+        <a class="nav-link  " th:href="@{/produto/cadastro}" th:classappend="${#strings.equals(menuAtivo, 'menu2')} ? '' : 'collapsed'">
           <i class="bi bi-person"></i>
           <span>Produtos</span>
         </a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" th:href="@{/show}">
+      <li class="nav-item" id="menu3">
+        <a class="nav-link collapsed" th:href="@{/show}" >
           <i class="bi bi-person"></i>
           <span>Produtos</span>
         </a>
@@ -135,4 +135,9 @@
 
     </ul>
 
-  </aside><!-- End Sidebar-->
+
+
+
+
+
+ </aside><!-- End Sidebar-->

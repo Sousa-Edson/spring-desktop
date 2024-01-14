@@ -37,7 +37,7 @@
                         <div class="row">
 
                             <div class=" col-2">
-                                <a class="btn btn-primary mt-2" th:href="@{/produto/cadastro}"><i
+                                <a class="btn btn-primary mt-0" th:href="@{/produto/cadastro}"><i
                                         class="ri-add-circle-line "> Novo</i> </a>
                             </div>
 
@@ -49,15 +49,14 @@
                                     <div class="invalid-feedback">
                                         Please choose a username.
                                     </div>
-                                    <a class=" input-group-text btn btn-primary" href="#"><i
-                                            class="ri-search-eye-line"> Pesquisar</i> </a>
+                                    <button  id="botao-pesquisa" class=" input-group-text btn btn-primary" ><i class="ri-search-eye-line"> Pesquisar</i> </button>
                                 </div>
                             </div>
 
                         </div>
 
                     </div>
-                    <table class="table table-borderless table-hover " id="tabelaDados">
+                    <table class="table table-borderless table-hover  mt-3" id="tabelaDados" >
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -102,7 +101,6 @@
 <!-- Incluindo o fragmento de script -->
 <th:block th:replace="~{fragments/script}"></th:block>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <th:block th:replace="~{fragments/script-produto-lista}"></th:block>
 </body>
 </html>

@@ -1,85 +1,95 @@
 <script>
-    $(document).ready(function() {
-        var dadosOriginais; // Armazena os dados originais para restaurar a tabela após a pesquisa
+    $(document).ready(async function() {
+    let dadosOriginais;
 
+    try {
         // Fazer uma requisição à sua API
-        $.ajax({
+        const response = await $.ajax({
             url: '/api/produtos',
             type: 'GET',
+            dataType: 'json'
+        });
+
+        dadosOriginais = response;
+        preencherTabela(response);
+        atualizarExibicaoTabela(response);
+    } catch (error) {
+        console.error('Erro na requisição à API:', error);
+    }
+
+    $('#campoPesquisa').on('input', function() {
+        pesquisar();
+    });
+
+    $('#botao-pesquisa').click(function() {
+        console.log('pesquisando');
+        pesquisarPorNome();
+    });
+
+    function preencherTabela(dados) {
+        const tbody = $('#tabelaDados tbody');
+        tbody.empty();
+
+        dados.forEach(function(dado) {
+            const row = $('<tr>');
+            row.append(`<td scope="row"><a href="/produto/${dado.id}">${dado.id}</a></td>`);
+            row.append(`<td>${dado.ativo ? '<span class="badge bg-success">Ativo</span>' : '<span class="badge bg-danger">Inativo</span>'}</td>`);
+            row.append(`<td>${dado.unidade}</td>`);
+            row.append(`<td><a href="/produto/${dado.id}" class="text-primary">${dado.descricao}</a></td>`);
+            row.append(`<td>${formatarPreco(dado.preco)}</td>`);
+            row.append(`<td>${dado.ncm}</td>`);
+            row.append(`<td>${dado.observacao || ''}</td>`);
+            tbody.append(row);
+        });
+    }
+
+    function pesquisar() {
+        const termoPesquisa = $('#campoPesquisa').val().toLowerCase();
+        const dadosFiltrados = dadosOriginais.filter(function(item) {
+            return (
+                item.id.toString().includes(termoPesquisa) ||
+                item.unidade.toLowerCase().includes(termoPesquisa) ||
+                item.descricao.toLowerCase().includes(termoPesquisa) ||
+                formatarPreco(item.preco).includes(termoPesquisa) ||
+                item.ncm.includes(termoPesquisa) ||
+                (item.observacao && item.observacao.toLowerCase().includes(termoPesquisa)) ||
+                (item.ativo ? 'ativo' : 'inativo').includes(termoPesquisa)
+            );
+        });
+        preencherTabela(dadosFiltrados);
+        atualizarExibicaoTabela(dadosFiltrados);
+    }
+
+    function pesquisarPorNome() {
+        const parteNome = $('#campoPesquisa').val();
+        $.ajax({
+            url: '/api/produtos/pesquisar',
+            type: 'GET',
+            data: { parteNome: parteNome },
             dataType: 'json',
-            success: function (data) {
-                dadosOriginais = data; // Armazena os dados originais
+            success: function(data) {
                 preencherTabela(data);
                 atualizarExibicaoTabela(data);
             },
-            error: function (error) {
+            error: function(error) {
                 console.error('Erro na requisição à API:', error);
             }
         });
+    }
 
-        // Adiciona um ouvinte de eventos ao campo de pesquisa
-        $('#campoPesquisa').on('input', function () {
-            pesquisar();
-        });
-
-        function preencherTabela(dados) {
-            // Selecionar o corpo da tabela
-            var tbody = $('#tabelaDados tbody');
-            tbody.empty(); // Limpa o conteúdo atual da tabela
-
-            // Iterar sobre os dados e adicionar linhas à tabela
-            dados.forEach(function (dado) {
-                var row = $('<tr>');
-                row.append('<td scope="row"><a href="/produto/' + dado.id + '#">' + dado.id + '</a></td>');
-                row.append('<td>' + (dado.ativo ? '<span class="badge bg-success">Ativo</span>' : '<span class="badge bg-danger">Inativo</span>') + '</td>'); // Converte booleano para Sim/Não
-                row.append('<td>' + dado.unidade + '</td>');
-                row.append('<td><a href="/produto/' + dado.id + '" class="text-primary">' + dado.descricao + '</a></td>');
-
-                // Formatar o preço como "R$ 8,9000"
-                var precoFormatado = new Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                  minimumFractionDigits: 4
-                }).format(dado.preco);
-                row.append('<td>' + precoFormatado + '</td>');
-
-                row.append('<td>' + dado.ncm + '</td>');
-                row.append('<td>' + (dado.observacao || '') + '</td>'); // Lidar com observacao nula
-                tbody.append(row);
-            });
-        }
-
-        function pesquisar() {
-            var termoPesquisa = $('#campoPesquisa').val().toLowerCase();
-            var dadosFiltrados = dadosOriginais.filter(function (item) {
-
-            // Formatar o preço durante a filtragem
-            item.precoFormatado = new Intl.NumberFormat('pt-BR', {
+    function formatarPreco(preco) {
+        return new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL',
             minimumFractionDigits: 4
-             }).format(item.preco);
+        }).format(preco);
+    }
 
-                return (
-                    item.id.toString().includes(termoPesquisa) ||
-                    item.unidade.toLowerCase().includes(termoPesquisa) ||
-                    item.descricao.toLowerCase().includes(termoPesquisa) ||
-                    item.precoFormatado.includes(termoPesquisa) || // Utilize o preço formatado na pesquisa
-                     item.ncm.includes(termoPesquisa) ||
-                    item.ncm.includes(termoPesquisa) ||
-                    (item.observacao && item.observacao.toLowerCase().includes(termoPesquisa)) ||
-                     (item.ativo ? 'ativo' : 'inativo').includes(termoPesquisa) // Incluído condição para "ativo" ou "inativo"
-                     );
-            });
-            preencherTabela(dadosFiltrados);
-            atualizarExibicaoTabela(dadosFiltrados);
-        }
-
-        function atualizarExibicaoTabela(dados) {
-            var tabelaVazia = dados.length === 0;
-            $('#tabelaDados').toggle(!tabelaVazia);
-            $('#mensagemTabelaVazia').toggle(tabelaVazia);
-        }
-    });
+    function atualizarExibicaoTabela(dados) {
+        const tabelaVazia = dados.length === 0;
+        $('#tabelaDados').toggle(!tabelaVazia);
+        $('#mensagemTabelaVazia').toggle(tabelaVazia);
+    }
+});
 
 </script>

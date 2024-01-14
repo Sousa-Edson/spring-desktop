@@ -54,4 +54,9 @@ public class ProdutoController {
         produtoService.deletarProduto(id);
     }
 
+
+    @GetMapping("/pesquisar")
+    public List<Produto> pesquisarPorParteDoNome(@RequestParam("parteNome") String parteDoNome) {
+        return produtoService.encontrarProdutosPorParteDoNome(parteDoNome);
+    }
 }
