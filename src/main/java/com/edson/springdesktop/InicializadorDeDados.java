@@ -34,7 +34,7 @@ public class InicializadorDeDados implements CommandLineRunner {
             produto1.setObservacao("Observação do Produto 1");
             produtoRepository.save(produto1);
 
-            for(int i=0;i < 100;i++){
+            for(int i=0;i < 1;i++){
             Produto produto2 = new Produto();
             produto2.setDescricao("Produto "+i);
             produto2.setAtivo(true);

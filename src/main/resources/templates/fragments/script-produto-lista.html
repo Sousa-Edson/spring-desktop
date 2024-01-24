@@ -44,8 +44,8 @@
             row.append(`
                 <td>
                     <div class="btn-group" role="group" aria-label="Ações">
-                        <a href="" class="btn btn-outline-primary" onclick="editarProduto(${dado.id})">Editar</a>
-                        <a href="" class="btn btn-outline-primary" onclick="exibirProduto(${dado.id})">Exibir</a>
+                        <a href="#" class="btn btn-outline-primary" onclick="editarProduto(${dado.id})">Editar</a>
+                        <a href="produto/edicao/${dado.id}" class="btn btn-outline-primary" onclick="exibirProduto(${dado.id})">Exibir</a>
                         <a href="" class="btn btn-outline-danger" onclick="deletarProduto(${dado.id})">Deletar</a>
                     </div>
                 </td>
@@ -102,6 +102,13 @@
         $('#tabelaDados').toggle(!tabelaVazia);
         $('#mensagemTabelaVazia').toggle(tabelaVazia);
     }
+
+    function editarProduto(id) {
+    // Redirecionar para a página de edição com o ID do produto
+    console.log(id)
+    window.location.href = '/produto/edicao/' + id;
+}
+
 });
 
 </script>
