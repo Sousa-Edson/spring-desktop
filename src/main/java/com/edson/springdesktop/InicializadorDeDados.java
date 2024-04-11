@@ -1,14 +1,11 @@
 package com.edson.springdesktop;
 
-import com.edson.springdesktop.api.model.Produto;
-import com.edson.springdesktop.api.repository.ProdutoRepository;
-import jakarta.annotation.PostConstruct;
+
+import com.edson.springdesktop.model.Produto;
+import com.edson.springdesktop.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
-import java.util.Arrays;
 
 @Component
 public class InicializadorDeDados implements CommandLineRunner {
@@ -34,17 +31,17 @@ public class InicializadorDeDados implements CommandLineRunner {
             produto1.setObservacao("Observação do Produto 1");
             produtoRepository.save(produto1);
 
-            for(int i=0;i < 100;i++){
-            Produto produto2 = new Produto();
-            produto2.setDescricao("Produto "+i);
-            produto2.setAtivo(true);
-            produto2.setUnidade("KG");
-            produto2.setPreco( 20.00);
-            produto2.setNcm("87654321");
-            produto2.setObservacao("Observação do Produto 2"+i);
-            produtoRepository.save(produto2);}
+            for(int i=0;i < 1;i++){
+                Produto produto2 = new Produto();
+                produto2.setDescricao("Produto "+i);
+                produto2.setAtivo(true);
+                produto2.setUnidade("KG");
+                produto2.setPreco( 20.00);
+                produto2.setNcm("87654321");
+                produto2.setObservacao("Observação do Produto 2"+i);
+                produtoRepository.save(produto2);}
 
-            // Adicione mais produtos conforme necessário
+
         }
     }
 }
