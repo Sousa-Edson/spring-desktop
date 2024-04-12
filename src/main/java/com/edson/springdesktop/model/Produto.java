@@ -30,7 +30,9 @@ public class Produto {
 
     private Boolean ativo;
 
+
     public Produto() {
+//        this.observacao = "Valor padrão"; // Definindo o valor padrão para o campo observacao
     }
 
     public Long getId() {
