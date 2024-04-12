@@ -41,7 +41,7 @@ public class ProdutoService {
             produto.setId(id);
             return produtoRepository.save(produto);
         }
-        return null; // Produto não encontrado
+        return null; 
     }
 
     public void deletarProduto(Long id) {

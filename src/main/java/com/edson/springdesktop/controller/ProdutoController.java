@@ -18,7 +18,6 @@ import java.util.Optional;
 @RequestMapping("/api/produtos")
 public class ProdutoController {
 
-
     @Autowired
     private ProdutoService produtoService;
 
@@ -29,34 +28,37 @@ public class ProdutoController {
             bindingResult.getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(errors);
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(produtoService.salvarProduto(produto));
-
+        Produto produtoSalvo = produtoService.salvarProduto(produto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(produtoSalvo);
     }
 
     @GetMapping
-    public List<Produto> listarProdutos() {
-        return produtoService.listarProdutos();
+    public ResponseEntity<List<Produto>> listarProdutos() {
+        List<Produto> produtos = produtoService.listarProdutos();
+        return ResponseEntity.ok(produtos);
     }
 
     @GetMapping("/{id}")
-    public Produto obterProdutoPorId(@PathVariable Long id) {
+    public ResponseEntity<Produto> obterProdutoPorId(@PathVariable Long id) {
         Optional<Produto> produto = produtoService.obterProdutoPorId(id);
-        return produto.orElse(null); // Retorna null se o produto não for encontrado
+        return produto.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public Produto atualizarProduto(@PathVariable Long id, @RequestBody Produto produto) {
-        return produtoService.atualizarProduto(id, produto);
+    public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @RequestBody Produto produto) {
+        Produto produtoAtualizado = produtoService.atualizarProduto(id, produto);
+        return ResponseEntity.ok(produtoAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public void deletarProduto(@PathVariable Long id) {
+    public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
         produtoService.deletarProduto(id);
+        return ResponseEntity.noContent().build();
     }
 
-
     @GetMapping("/pesquisar")
-    public List<Produto> pesquisarPorParteDoNome(@RequestParam("parteNome") String parteDoNome) {
-        return produtoService.encontrarProdutosPorParteDoNome(parteDoNome);
+    public ResponseEntity<List<Produto>> pesquisarPorParteDoNome(@RequestParam("parteNome") String parteDoNome) {
+        List<Produto> produtos = produtoService.encontrarProdutosPorParteDoNome(parteDoNome);
+        return ResponseEntity.ok(produtos);
     }
 }
