@@ -20,7 +20,7 @@ public class ItemService {
 
     public Object salvarItem(Item item) {
        // Obtém o produto associado ao item pelo ID
-       Optional<Produto> produtoOptional = produtoService.obterProdutoPorId(item.getProduto().getId());
+       Optional<Produto> produtoOptional = produtoService.findById(item.getProduto().getId());
        if (produtoOptional.isPresent()) {
            Produto produto = produtoOptional.get();
            item.setProduto(produto);

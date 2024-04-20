@@ -2,16 +2,12 @@ package com.edson.springdesktop.controller;
 
 import com.edson.springdesktop.model.Produto;
 import com.edson.springdesktop.service.ProdutoService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -21,44 +17,41 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @PostMapping
-    public ResponseEntity<Object> salvarProduto(@RequestBody @Valid Produto produto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errors = new HashMap<>();
-            bindingResult.getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
-            return ResponseEntity.badRequest().body(errors);
-        }
-        Produto produtoSalvo = produtoService.salvarProduto(produto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(produtoSalvo);
-    }
-
     @GetMapping
-    public ResponseEntity<List<Produto>> listarProdutos() {
-        List<Produto> produtos = produtoService.listarProdutos();
+    public ResponseEntity<List<Produto>> findAll() {
+        List<Produto> produtos = produtoService.findAll();
         return ResponseEntity.ok(produtos);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> obterProdutoPorId(@PathVariable Long id) {
-        Optional<Produto> produto = produtoService.obterProdutoPorId(id);
-        return produto.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Produto> findById(@PathVariable Long id) {
+        Optional<Produto> produto = produtoService.findById(id);
+        return produto.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<Produto> save(@RequestBody Produto produto) {
+        Produto savedProduto = produtoService.save(produto);
+        return new ResponseEntity<>(savedProduto, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @RequestBody Produto produto) {
-        Produto produtoAtualizado = produtoService.atualizarProduto(id, produto);
-        return ResponseEntity.ok(produtoAtualizado);
+    public ResponseEntity<Produto> update(@PathVariable Long id, @RequestBody Produto produto) {
+        if (!produtoService.findById(id).isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        produto.setId(id);
+        Produto updatedProduto = produtoService.save(produto);
+        return ResponseEntity.ok(updatedProduto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
-        produtoService.deletarProduto(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        if (!produtoService.findById(id).isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        produtoService.deleteById(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/pesquisar")
-    public ResponseEntity<List<Produto>> pesquisarPorParteDoNome(@RequestParam("parteNome") String parteDoNome) {
-        List<Produto> produtos = produtoService.encontrarProdutosPorParteDoNome(parteDoNome);
-        return ResponseEntity.ok(produtos);
     }
 }

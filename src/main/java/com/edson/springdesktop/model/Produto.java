@@ -20,7 +20,7 @@ public class Produto {
     private String descricao;
 
     @NotNull(message = "O preço não pode ser nulo")
-    private Double preco;
+    private double preco;
 
     @NotBlank(message = "O ncm não pode estar em branco")
     @Size(min = 8, max = 8, message = "O ncm deve ter 8 caracteres")

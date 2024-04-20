@@ -14,37 +14,20 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public List<Produto> encontrarProdutosPorParteDoNome(String parteDoNome) {
-        return produtoRepository.findByDescricaoContaining(parteDoNome.toUpperCase());
-    }
-
-    public List<Produto> listarProdutos() {
+    public List<Produto> findAll() {
         return produtoRepository.findAll();
     }
 
-    public Optional<Produto> obterProdutoPorId(Long id) {
+    public Optional<Produto> findById(Long id) {
         return produtoRepository.findById(id);
     }
 
-    public Produto salvarProduto(Produto produto) {
-        if (produto.getAtivo() == null) {
-            produto.setAtivo(true);
-        }
-        if (produto.getObservacao() == null) {
-            produto.setObservacao("");
-        }
+    public Produto save(Produto produto) {
+        produto.setAtivo(true);
         return produtoRepository.save(produto);
     }
 
-    public Produto atualizarProduto(Long id, Produto produto) {
-        if (produtoRepository.existsById(id)) {
-            produto.setId(id);
-            return produtoRepository.save(produto);
-        }
-        return null; 
-    }
-
-    public void deletarProduto(Long id) {
+    public void deleteById(Long id) {
         produtoRepository.deleteById(id);
     }
 }
