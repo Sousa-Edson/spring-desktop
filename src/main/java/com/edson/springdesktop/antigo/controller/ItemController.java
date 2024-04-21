@@ -1,8 +1,8 @@
-package com.edson.springdesktop.controller;
+package com.edson.springdesktop.antigo.controller;
  
 
-import com.edson.springdesktop.model.Item;
-import com.edson.springdesktop.service.ItemService;
+import com.edson.springdesktop.antigo.model.Item;
+import com.edson.springdesktop.antigo.service.ItemService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/itens")
+//@RestController
+//@RequestMapping("/api/itens")
 public class ItemController {
 
     @Autowired

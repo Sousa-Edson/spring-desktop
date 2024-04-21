@@ -1,10 +1,11 @@
-package com.edson.springdesktop.service;
+package com.edson.springdesktop.antigo.service;
 
-import com.edson.springdesktop.model.Pedido;
-import com.edson.springdesktop.model.Produto;
-import com.edson.springdesktop.repository.PedidoRepository;
+import com.edson.springdesktop.antigo.model.Pedido;
+import com.edson.springdesktop.antigo.model.Produto;
+import com.edson.springdesktop.antigo.repository.PedidoRepository;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

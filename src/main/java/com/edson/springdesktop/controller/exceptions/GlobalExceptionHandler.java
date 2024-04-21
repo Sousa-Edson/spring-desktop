@@ -1,6 +1,7 @@
-package com.edson.springdesktop.controller;
+package com.edson.springdesktop.controller.exceptions;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,6 +14,16 @@ import org.springframework.util.StringUtils;
 @ControllerAdvice
 public class GlobalExceptionHandler {
  
+    @ExceptionHandler(TransactionSystemException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> handleTransactionSystemExceptionException(TransactionSystemException ex) {
+        String errorMessage = "Transação invalida.";
+        if (ex.getCause() != null && !StringUtils.isEmpty(ex.getCause().getMessage())) {
+            errorMessage += " Detalhes: " + ex.getMessage();
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+    }
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
@@ -37,7 +48,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        return ResponseEntity.badRequest().body("MethodArgumentNotValidException::: "+ex.getMessage());
+        return ResponseEntity.badRequest().body("MethodArgumentNotValidException::: \n"+ex.getBindingResult().getAllErrors().get(0).getDefaultMessage());
     }
 
     @ExceptionHandler(Exception.class)

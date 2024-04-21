@@ -1,7 +1,7 @@
-package com.edson.springdesktop.service;
+package com.edson.springdesktop.antigo.service;
 
-import com.edson.springdesktop.model.Produto;
-import com.edson.springdesktop.repository.ProdutoRepository;
+import com.edson.springdesktop.antigo.model.Produto;
+import com.edson.springdesktop.antigo.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

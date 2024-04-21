@@ -1,8 +1,8 @@
 package com.edson.springdesktop;
 
 
-import com.edson.springdesktop.model.Produto;
-import com.edson.springdesktop.repository.ProdutoRepository;
+import com.edson.springdesktop.antigo.model.Produto;
+import com.edson.springdesktop.antigo.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
-package com.edson.springdesktop.controller; 
+package com.edson.springdesktop.antigo.controller;
 
-import com.edson.springdesktop.model.Pedido;
-import com.edson.springdesktop.service.PedidoService;
+import com.edson.springdesktop.antigo.model.Pedido;
+import com.edson.springdesktop.antigo.service.PedidoService;
 
 import jakarta.validation.Valid;
 
@@ -9,17 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/pedidos")
+//@RestController
+//@RequestMapping("/api/pedidos")
 public class PedidoController {
 
     @Autowired

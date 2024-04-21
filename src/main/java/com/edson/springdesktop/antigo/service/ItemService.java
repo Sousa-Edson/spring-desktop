@@ -1,8 +1,8 @@
-package com.edson.springdesktop.service; 
+package com.edson.springdesktop.antigo.service;
 
-import com.edson.springdesktop.model.Item;
-import com.edson.springdesktop.model.Produto;
-import com.edson.springdesktop.repository.ItemRepository;
+import com.edson.springdesktop.antigo.model.Item;
+import com.edson.springdesktop.antigo.model.Produto;
+import com.edson.springdesktop.antigo.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

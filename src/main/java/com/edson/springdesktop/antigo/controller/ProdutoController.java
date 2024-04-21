@@ -1,7 +1,7 @@
-package com.edson.springdesktop.controller;
+package com.edson.springdesktop.antigo.controller;
 
-import com.edson.springdesktop.model.Produto;
-import com.edson.springdesktop.service.ProdutoService;
+import com.edson.springdesktop.antigo.model.Produto;
+import com.edson.springdesktop.antigo.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/produtos")
+//@RestController
+//@RequestMapping("/api/produtos")
 public class ProdutoController {
 
     @Autowired

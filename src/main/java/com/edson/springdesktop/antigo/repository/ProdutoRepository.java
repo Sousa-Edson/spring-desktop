@@ -1,6 +1,6 @@
-package com.edson.springdesktop.repository;
+package com.edson.springdesktop.antigo.repository;
 
-import com.edson.springdesktop.model.Produto;
+import com.edson.springdesktop.antigo.model.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
