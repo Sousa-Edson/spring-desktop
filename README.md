@@ -1,6 +1,4 @@
-Claro, aqui está um exemplo de README simples e resumido:
-
----
+ 
 
 # NF-e Documentação
 
