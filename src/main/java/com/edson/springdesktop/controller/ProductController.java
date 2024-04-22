@@ -33,8 +33,14 @@ public class ProductController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado para o ID: " + id);
         }
-    }
+    } 
 
+    @GetMapping("/description/{description}")
+    public ResponseEntity<List<Product>> findByDescriptionContaining(@PathVariable String description) {
+        List<Product> Products  = productService.findByDescriptionContaining(description);
+        System.out.println("A BUSCA RETORNA::: "+Products);
+        return ResponseEntity.ok(Products);
+    }
 
     @PostMapping
     public ResponseEntity<Product> save(@RequestBody  @Valid Product Product) {
