@@ -2,6 +2,7 @@ package com.edson.springdesktop.service;
 
 
 import com.edson.springdesktop.domain.model.orderItem.OrderItem;
+import com.edson.springdesktop.controller.exceptions.NotFoundException;
 import com.edson.springdesktop.domain.model.Product;
 import com.edson.springdesktop.domain.repository.OrderItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,19 +27,19 @@ public class OrderItemService {
         return orderItemRepository.findAll();
     }
 
-    public Optional<OrderItem> findById(UUID id) {
+    public Optional<OrderItem> findById(Long id) {
         return orderItemRepository.findById(id);
     }
 
     public OrderItem save(OrderItem orderItem) {
         Optional<Product> product = productService.findById(orderItem.getProduct().getId());
-
+ 
         if(!product.isPresent()){
-            throw new RuntimeException("Produto não encontrado para o ID: " + orderItem.getProduct().getId());
+            throw new NotFoundException("Produto não encontrado com o ID: " + orderItem.getProduct().getId());
         }
+        orderItem.setProduct(product.get());
 
-        orderItem.setProduct(product.orElse(null));
-
+ 
         BigDecimal unitPrice = product.get().getUnitPrice();
         BigDecimal quantity = orderItem.getQuantity();
 
@@ -48,7 +50,7 @@ public class OrderItemService {
         return orderItemRepository.save(orderItem);
     }
 
-    public void deleteById(UUID id) {
+    public void deleteById(Long id) {
         orderItemRepository.deleteById(id);
     }
 }

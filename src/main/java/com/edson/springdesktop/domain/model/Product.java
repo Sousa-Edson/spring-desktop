@@ -5,16 +5,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.math.BigDecimal;
-import java.util.UUID;
+import java.math.BigDecimal; 
 
 @Entity
 @Table(name = "products")
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "O codigo do produto não pode estar em branco")
     @Size(min = 1, max = 255, message = "O codigo do produto deve ter entre 1 e 255 caracteres")
@@ -40,14 +39,8 @@ public class Product {
 
     public Product() {
     }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
+ 
+ 
 
     public String getProductCode() {
         return productCode;
@@ -89,5 +82,17 @@ public class Product {
 
     public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+
+
+    public Long getId() {
+        return id;
+    }
+
+
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

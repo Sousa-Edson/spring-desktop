@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
  import com.edson.springdesktop.domain.model.orderItem.SaveOrderItemDTO;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.Optional; 
 
 @RestController
 @RequestMapping("/api/order-items")
@@ -30,7 +29,7 @@ public class OrderItemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable UUID id) {
+    public ResponseEntity<?> findById(@PathVariable Long id) {
         Optional<OrderItem> orderItemOptional = orderItemService.findById(id);
 
         if (orderItemOptional.isPresent()) {
@@ -48,7 +47,7 @@ public class OrderItemController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<OrderItem> update(@PathVariable UUID id, @RequestBody OrderItem orderItem) {
+    public ResponseEntity<OrderItem> update(@PathVariable Long id, @RequestBody OrderItem orderItem) {
         if (!orderItemService.findById(id).isPresent()) {
             return ResponseEntity.notFound().build();
         }
@@ -58,7 +57,7 @@ public class OrderItemController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (!orderItemService.findById(id).isPresent()) {
             return ResponseEntity.notFound().build();
         }

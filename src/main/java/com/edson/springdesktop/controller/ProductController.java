@@ -9,8 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.Optional; 
 
 @RestController
 @RequestMapping("/api/products")
@@ -26,7 +25,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable UUID id) {
+    public ResponseEntity<?> findById(@PathVariable Long id) {
         Optional<Product> productOptional = productService.findById(id);
 
         if (productOptional.isPresent()) {
@@ -44,7 +43,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable UUID id, @RequestBody Product Product) {
+    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product Product) {
         if (!productService.findById(id).isPresent()) {
             return ResponseEntity.notFound().build();
         }
@@ -54,7 +53,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (!productService.findById(id).isPresent()) {
             return ResponseEntity.notFound().build();
         }

@@ -1,8 +1,9 @@
 package com.edson.springdesktop.domain.model.orderItem;
 
 import com.edson.springdesktop.domain.model.Product;
-import jakarta.persistence.*;
+import jakarta.persistence.*; 
 import jakarta.validation.constraints.*;
+ 
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -11,8 +12,8 @@ import java.util.UUID;
 @Table(name = "order_item")
 public class OrderItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     private Product product;
@@ -31,13 +32,7 @@ public class OrderItem {
     public OrderItem() {
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    
 
     public Product getProduct() {
         return product;
@@ -70,5 +65,17 @@ public class OrderItem {
 
     public void setTotalValue(BigDecimal totalValue) {
         this.totalValue = totalValue;
+    }
+
+
+
+    public Long getId() {
+        return id;
+    }
+
+
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
