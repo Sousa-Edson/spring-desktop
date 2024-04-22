@@ -1,12 +1,13 @@
 package com.edson.springdesktop.domain.model.orderItem;
 
 import com.edson.springdesktop.domain.model.Product;
-import jakarta.persistence.*; 
-import jakarta.validation.constraints.*;
- 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Entity
 @Table(name = "order_item")
