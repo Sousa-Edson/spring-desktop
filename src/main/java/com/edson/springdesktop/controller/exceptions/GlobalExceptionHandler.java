@@ -1,4 +1,5 @@
 package com.edson.springdesktop.controller.exceptions;
+
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.TransactionSystemException;
@@ -13,7 +14,14 @@ import org.springframework.util.StringUtils;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
- 
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND).body("handleRuntimeException::: \n" + ex.getMessage());
+    }
+
+
     @ExceptionHandler(TransactionSystemException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handleTransactionSystemExceptionException(TransactionSystemException ex) {
@@ -48,7 +56,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        return ResponseEntity.badRequest().body("MethodArgumentNotValidException::: \n"+ex.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+        return ResponseEntity.badRequest().body("MethodArgumentNotValidException::: \n" + ex.getBindingResult().getAllErrors().get(0).getDefaultMessage());
     }
 
     @ExceptionHandler(Exception.class)

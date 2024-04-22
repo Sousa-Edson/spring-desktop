@@ -1,20 +1,21 @@
 package com.edson.springdesktop;
 
-
-import com.edson.springdesktop.antigo.model.Produto;
-import com.edson.springdesktop.antigo.repository.ProdutoRepository;
+ 
 import com.edson.springdesktop.domain.model.Product;
-import com.edson.springdesktop.domain.repository.ProductRepository;
+import com.edson.springdesktop.domain.repository.ProductRepository; 
 
 import java.math.BigDecimal;
-
+ 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 public class InicializadorDeDados implements CommandLineRunner {
 
+ 
     private final ProductRepository productRepository;
 
     @Autowired
@@ -26,6 +27,7 @@ public class InicializadorDeDados implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // Verifica se a tabela de produtos está vazia
         if (productRepository.count() == 0) {
+ 
             // Popula a tabela com alguns produtos de exemplo
            
             for(int i=0;i < 1;i++){
@@ -36,6 +38,7 @@ public class InicializadorDeDados implements CommandLineRunner {
                 produto2.setUnitPrice(new BigDecimal(12.7588));
                 produto2.setNCM("87654321"); 
                 productRepository.save(produto2);}
+ 
 
 
         }
