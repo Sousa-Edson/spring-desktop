@@ -2,6 +2,7 @@ package com.edson.springdesktop.service;
 
 
 import com.edson.springdesktop.domain.model.orderItem.OrderItem;
+import com.edson.springdesktop.controller.exceptions.NotFoundException;
 import com.edson.springdesktop.domain.model.Product;
 import com.edson.springdesktop.domain.repository.OrderItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,10 +32,13 @@ public class OrderItemService {
     }
 
     public OrderItem save(OrderItem orderItem) {
-        Product product = productService.findById(orderItem.getProduct().getId()).get();
-        orderItem.setProduct(product);
+        Optional<Product> product = productService.findById(orderItem.getProduct().getId());
+        if(!product.isPresent()){
+            throw new NotFoundException("Produto não encontrado com o ID: " + orderItem.getProduct().getId());
+        }
+        orderItem.setProduct(product.get());
 
-        BigDecimal unitPrice = product.getUnitPrice();
+        BigDecimal unitPrice = product.get().getUnitPrice();
         BigDecimal quantity = orderItem.getQuantity();
 
         BigDecimal totalValue = unitPrice.multiply(quantity);
