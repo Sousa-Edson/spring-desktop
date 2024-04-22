@@ -30,10 +30,15 @@ public class OrderItemService {
     }
 
     public OrderItem save(OrderItem orderItem) {
-        Product product = productService.findById(orderItem.getProduct().getId()).get();
-        orderItem.setProduct(product);
+        Optional<Product> product = productService.findById(orderItem.getProduct().getId());
 
-        BigDecimal unitPrice = product.getUnitPrice();
+        if(!product.isPresent()){
+            throw new RuntimeException("Produto não encontrado para o ID: " + orderItem.getProduct().getId());
+        }
+
+        orderItem.setProduct(product.orElse(null));
+
+        BigDecimal unitPrice = product.get().getUnitPrice();
         BigDecimal quantity = orderItem.getQuantity();
 
         BigDecimal totalValue = unitPrice.multiply(quantity);

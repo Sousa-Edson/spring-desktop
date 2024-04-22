@@ -5,11 +5,16 @@ import com.edson.springdesktop.domain.model.Product;
 public class ConvertToOrderItem {
     public static OrderItem convertToOrderItem(SaveOrderItemDTO orderItemDTO) {
         OrderItem orderItem = new OrderItem();
+
+        // Definindo o produto
         Product product = new Product();
-        product.setId(orderItemDTO.getProductId());
+        product.setId(orderItemDTO.productId());
         orderItem.setProduct(product);
-        orderItem.setCFOP(orderItemDTO.getCFOP());
-        orderItem.setQuantity(orderItemDTO.getQuantity());
+
+        // Definindo CFOP e quantidade
+        orderItem.setCFOP(orderItemDTO.CFOP());
+        orderItem.setQuantity(orderItemDTO.quantity());
+
         return orderItem;
     }
 }

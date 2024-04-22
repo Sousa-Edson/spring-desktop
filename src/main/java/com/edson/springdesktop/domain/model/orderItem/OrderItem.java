@@ -2,10 +2,7 @@ package com.edson.springdesktop.domain.model.orderItem;
 
 import com.edson.springdesktop.domain.model.Product;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -25,7 +22,7 @@ public class OrderItem {
     private String CFOP;
 
     @NotNull(message = "A quantidade não pode ser nula")
-    @Positive(message = "A quantidade deve ser um número positivo")
+    @PositiveOrZero(message = "A quantidade deve ser um número positivo")
     private BigDecimal quantity;
 
     @NotNull(message = "O total não pode ser nulo")
