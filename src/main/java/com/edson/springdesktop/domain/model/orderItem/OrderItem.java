@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
@@ -14,8 +15,8 @@ import java.util.UUID;
 @Table(name = "order_item")
 public class OrderItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     private Product product;
@@ -25,7 +26,7 @@ public class OrderItem {
     private String CFOP;
 
     @NotNull(message = "A quantidade não pode ser nula")
-    @Positive(message = "A quantidade deve ser um número positivo")
+    @PositiveOrZero(message = "A quantidade deve ser um número positivo")
     private BigDecimal quantity;
 
     @NotNull(message = "O total não pode ser nulo")
@@ -34,13 +35,7 @@ public class OrderItem {
     public OrderItem() {
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    
 
     public Product getProduct() {
         return product;
@@ -73,5 +68,17 @@ public class OrderItem {
 
     public void setTotalValue(BigDecimal totalValue) {
         this.totalValue = totalValue;
+    }
+
+
+
+    public Long getId() {
+        return id;
+    }
+
+
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -25,7 +25,7 @@ public class OrderItemService {
         return orderItemRepository.findAll();
     }
 
-    public Optional<OrderItem> findById(UUID id) {
+    public Optional<OrderItem> findById(Long id) {
         return orderItemRepository.findById(id);
     }
 
@@ -43,7 +43,7 @@ public class OrderItemService {
         return orderItemRepository.save(orderItem);
     }
 
-    public void deleteById(UUID id) {
+    public void deleteById(Long id) {
         orderItemRepository.deleteById(id);
     }
 }
