@@ -1,19 +1,31 @@
 package com.edson.springdesktop.controller;
 
 
-import com.edson.springdesktop.domain.model.orderItem.ConvertToOrderItem;
-import com.edson.springdesktop.domain.model.orderItem.OrderItem;
-import com.edson.springdesktop.service.OrderItemService;
-import jakarta.validation.Valid;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
- import com.edson.springdesktop.domain.model.orderItem.SaveOrderItemDTO;
+import com.edson.springdesktop.domain.model.orderItem.ConvertToOrderItem;
+import com.edson.springdesktop.domain.model.orderItem.OrderItem;
+import com.edson.springdesktop.domain.model.orderItem.SaveOrderItemDTO;
+import com.edson.springdesktop.service.OrderItemService;
 
-import java.util.List;
-import java.util.Optional; 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.Valid; 
 
 @RestController
 @RequestMapping("/api/order-items")
@@ -39,6 +51,7 @@ public class OrderItemController {
         }
     }
 
+    
     @PostMapping
     public ResponseEntity<OrderItem> save(@RequestBody @Valid SaveOrderItemDTO orderItemDTO) {
         OrderItem savedOrderItem = orderItemService.save(ConvertToOrderItem.convertToOrderItem(orderItemDTO));

@@ -33,6 +33,7 @@ public class OrderItem {
     private BigDecimal totalValue;
 
     @NotNull(message = "O tipo de transação não pode ser nulo")
+    @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
 
     public OrderItem() {

@@ -15,6 +15,8 @@ public class ConvertToOrderItem {
         orderItem.setCFOP(orderItemDTO.CFOP());
         orderItem.setQuantity(orderItemDTO.quantity());
 
+        orderItem.setTransactionType(orderItemDTO.transactionType());
+
         return orderItem;
     }
 }
