@@ -5,6 +5,7 @@ import com.edson.springdesktop.domain.model.orderItem.OrderItem;
 import com.edson.springdesktop.controller.exceptions.NotFoundException;
 import com.edson.springdesktop.domain.model.Product;
 import com.edson.springdesktop.domain.repository.OrderItemRepository;
+import com.edson.springdesktop.service.enums.TransactionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,14 @@ public class OrderItemService {
         if(!product.isPresent()){
             throw new NotFoundException("Produto não encontrado com o ID: " + orderItem.getProduct().getId());
         }
+
+        if (orderItem.getTransactionType() == null) {
+            throw new IllegalArgumentException("O tipo de transação não pode ser nulo");
+        } else if (orderItem.getTransactionType() != TransactionType.PEDIDO_COMPRAS &&
+                orderItem.getTransactionType() != TransactionType.PEDIDO_VENDAS) {
+            throw new IllegalArgumentException("Tipo de transação inválido. As opções válidas são: PEDIDO_COMPRAS, PEDIDO_VENDAS");
+        }
+
         orderItem.setProduct(product.get());
 
  

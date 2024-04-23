@@ -30,12 +30,12 @@ public class InicializadorDeDados implements CommandLineRunner {
  
             // Popula a tabela com alguns produtos de exemplo
            
-            for(int i=0;i < 1;i++){
+            for(int i=0;i < 10;i++){
                 Product produto2 = new Product();
                 produto2.setProductCode("CODE "+i); 
                 produto2.setDescription("Produto "+i); 
                 produto2.setUnit("UN");
-                produto2.setUnitPrice(new BigDecimal(12.7588));
+                produto2.setUnitPrice(new BigDecimal(12.7588+(i*50.7895)));
                 produto2.setNCM("87654321"); 
                 productRepository.save(produto2);}
  

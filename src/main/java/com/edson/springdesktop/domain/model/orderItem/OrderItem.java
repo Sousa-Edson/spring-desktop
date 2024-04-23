@@ -1,11 +1,13 @@
 package com.edson.springdesktop.domain.model.orderItem;
 
 import com.edson.springdesktop.domain.model.Product;
+import com.edson.springdesktop.service.enums.TransactionType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
+
 
 import java.math.BigDecimal;
 
@@ -30,10 +32,11 @@ public class OrderItem {
     @NotNull(message = "O total não pode ser nulo")
     private BigDecimal totalValue;
 
+    @NotNull(message = "O tipo de transação não pode ser nulo")
+    private TransactionType transactionType;
+
     public OrderItem() {
     }
-
-    
 
     public Product getProduct() {
         return product;
@@ -68,15 +71,19 @@ public class OrderItem {
         this.totalValue = totalValue;
     }
 
-
-
     public Long getId() {
         return id;
     }
 
-
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
     }
 }
