@@ -1,5 +1,8 @@
 package com.edson.springdesktop.service.enums;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public enum TransactionType {
     PEDIDO_COMPRAS(0, "Pedido de Compras"),
     PEDIDO_VENDAS(1, "Pedido de Vendas");
@@ -18,5 +21,12 @@ public enum TransactionType {
 
     public String getDisplayName() {
         return displayName;
+    }
+    public Map<String, Object> getInfo() {
+        Map<String, Object> info = new LinkedHashMap<>();
+        info.put("id", this.id);
+        info.put("transactionType", this.name());
+        info.put("displayName", this.displayName);
+        return info;
     }
 }
