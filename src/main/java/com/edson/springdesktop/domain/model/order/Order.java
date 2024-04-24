@@ -1,5 +1,6 @@
-package com.edson.springdesktop.domain.model;
+package com.edson.springdesktop.domain.model.order;
 
+import com.edson.springdesktop.domain.model.Client;
 import com.edson.springdesktop.domain.model.orderItem.OrderItem;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,6 +1,7 @@
 package com.edson.springdesktop.controller;
- 
-import com.edson.springdesktop.domain.model.Order;
+
+import com.edson.springdesktop.domain.model.order.Order;
+import com.edson.springdesktop.domain.model.order.OrderDTO;
 import com.edson.springdesktop.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -18,11 +20,22 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+
+//    @GetMapping
+//    public ResponseEntity<List<Order>> findAll() {
+//        List<Order> orders = orderService.findAll();
+//        return ResponseEntity.ok(orders);
+//    }
+
     @GetMapping
-    public ResponseEntity<List<Order>> findAll() {
+    public ResponseEntity<List<OrderDTO>> findAll() {
         List<Order> orders = orderService.findAll();
-        return ResponseEntity.ok(orders);
+        List<OrderDTO> orderDTOs = orders.stream()
+                .map(OrderDTO::fromOrder)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(orderDTOs);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {

@@ -1,8 +1,5 @@
 package com.edson.springdesktop.service;
 
-import com.edson.springdesktop.controller.exceptions.NotFoundException;
-import com.edson.springdesktop.domain.model.Order;
-import com.edson.springdesktop.domain.model.Product;
 import com.edson.springdesktop.domain.model.orderItem.OrderItem;
 import com.edson.springdesktop.domain.repository.OrderItemRepository;
 import java.math.BigDecimal;

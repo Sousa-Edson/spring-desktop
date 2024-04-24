@@ -2,34 +2,38 @@ package com.edson.springdesktop.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.edson.springdesktop.domain.model.order.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.edson.springdesktop.domain.model.Order;
+import com.edson.springdesktop.domain.model.order.Order;
 import com.edson.springdesktop.domain.repository.OrderRepository;
-  
+
 
 @Service
 public class OrderService {
 
-  @Autowired
-  private OrderRepository orderRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
-  public List<Order> findAll() { 
-    
-    return orderRepository.findAll();
-  }
+    public List<Order> findAll() {
 
-  public Optional<Order> findById(Long id) {
-    return orderRepository.findById(id);
-  }
+        return orderRepository.findAll();
+    }
 
-  public Order save(Order order) {
-    return orderRepository.save(order);
-  }
+    public Optional<Order> findById(Long id) {
+        return orderRepository.findById(id);
+    }
 
-  public void deleteById(Long id) {
-    orderRepository.deleteById(id);
-  }
+    public Order save(Order order) {
+        return orderRepository.save(order);
+    }
+
+    public void deleteById(Long id) {
+        orderRepository.deleteById(id);
+    }
+
+
 }
