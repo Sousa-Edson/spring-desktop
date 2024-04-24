@@ -1,6 +1,7 @@
 package com.edson.springdesktop.domain.model;
 
 import com.edson.springdesktop.domain.model.orderItem.OrderItem;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,7 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
 import java.sql.Date;
 import java.util.List;
 
@@ -28,13 +28,14 @@ public class Order {
 
   private Date issueDate;
 
+  @Column(name = "naturezaOperacao")
+  private String operationNature;
 
   @OneToMany(mappedBy = "order")
   private List<OrderItem> orderItems;
 
   @ManyToOne
   private Client client;
-
 
   public Order() {}
 
@@ -94,6 +95,12 @@ public class Order {
     this.issueDate = issueDate;
   }
 
-   
+  public String getOperationNature() {
+    return operationNature;
+  }
+
+  public void setOperationNature(String operationNature) {
+    this.operationNature = operationNature;
+  }
   
 }
