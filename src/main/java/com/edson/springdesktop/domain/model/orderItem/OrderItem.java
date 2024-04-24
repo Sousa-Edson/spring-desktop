@@ -41,7 +41,6 @@ public class OrderItem {
     private TransactionType transactionType;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
     private Order order;
 
     public OrderItem() {
