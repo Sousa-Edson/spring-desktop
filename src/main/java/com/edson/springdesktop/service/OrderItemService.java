@@ -37,13 +37,11 @@ public class OrderItemService {
 
     public OrderItem save(OrderItem orderItem) {
         Optional<Product> product = productService.findById(orderItem.getProduct().getId());
- 
-        if(!product.isPresent()){
+
+        if (!product.isPresent()) {
             throw new NotFoundException("Produto não encontrado com o ID: " + orderItem.getProduct().getId());
         }
         orderItem.setProduct(product.get());
-
-
 
         // Verificar se a ordem à qual o item está sendo associado existe
         Optional<Order> orderOptional = orderRepository.findById(orderItem.getOrder().getId());
@@ -66,4 +64,5 @@ public class OrderItemService {
     public void deleteById(Long id) {
         orderItemRepository.deleteById(id);
     }
+
 }

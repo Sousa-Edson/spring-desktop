@@ -1,5 +1,6 @@
 package com.edson.springdesktop.domain.model.orderItem;
 
+import com.edson.springdesktop.domain.model.Order;
 import com.edson.springdesktop.service.enums.TransactionType;
  
 import jakarta.validation.constraints.NotBlank;
@@ -14,7 +15,8 @@ public record SaveOrderItemDTO(
         @NotBlank(message = "O CFOP não pode estar em branco") String CFOP,
         @PositiveOrZero(message = "A quantidade deve ser um número positivo ou zero")
         @NotNull(message = "A quantidade não pode ser nula") BigDecimal quantity,
-        @NotNull(message = "O tipo de transação não pode ser nulo")   TransactionType transactionType
+        @NotNull(message = "O tipo de transação não pode ser nulo")   TransactionType transactionType,
+        Order order
 ) {
         public String transactionTypeDisplayName() {
                 return transactionType.getDisplayName();

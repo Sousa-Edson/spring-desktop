@@ -17,31 +17,31 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private OrderItemService orderItemService;
+
 
     public List<Order> findAll() {
+        Order order = orderRepository.getReferenceById(1L);
+
+        System.out.println("BB"+order);
         return orderRepository.findAll();
     }
 
     public Optional<Order> findById(Long id) {
+
         return orderRepository.findById(id);
     }
 
     public Order save(Order order) {
-//        Optional<OrderItem> orderItem = orderItemService.findById(order.getOrderItems().getId());
-//
-//        if(!orderItem.isPresent()){
-//            throw new NotFoundException("Produto não encontrado com o ID: " + orderItem.().getId());
-//        }
-//
-//
-//
-//        orderItem.setProduct(product.get());
-
         return orderRepository.save(order);
     }
 
     public void deleteById(Long id) {
         orderRepository.deleteById(id);
     }
+
+
+
 }
 

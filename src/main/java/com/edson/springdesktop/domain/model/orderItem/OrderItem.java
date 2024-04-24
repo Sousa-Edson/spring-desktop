@@ -40,7 +40,8 @@ public class OrderItem {
     @NotNull(message = "O tipo de transação não pode ser nulo")
     private TransactionType transactionType;
 
-    @ManyToOne
+    @ManyToOne()
+  @JoinColumn(name = "order_id")
     private Order order;
 
     public OrderItem() {

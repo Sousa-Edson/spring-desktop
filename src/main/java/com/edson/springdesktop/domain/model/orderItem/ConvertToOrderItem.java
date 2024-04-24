@@ -17,6 +17,8 @@ public class ConvertToOrderItem {
 
         orderItem.setTransactionType(orderItemDTO.transactionType());
 
+        orderItem.setOrder(orderItemDTO.order());
+
         return orderItem;
     }
 }
