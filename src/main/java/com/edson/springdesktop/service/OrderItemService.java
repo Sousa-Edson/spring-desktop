@@ -1,19 +1,16 @@
 package com.edson.springdesktop.service;
 
 
-import com.edson.springdesktop.domain.model.orderItem.OrderItem;
 import com.edson.springdesktop.controller.exceptions.NotFoundException;
 import com.edson.springdesktop.domain.model.Product;
+import com.edson.springdesktop.domain.model.orderItem.OrderItem;
 import com.edson.springdesktop.domain.repository.OrderItemRepository;
-import com.edson.springdesktop.service.enums.TransactionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class OrderItemService {

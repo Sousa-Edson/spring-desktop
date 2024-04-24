@@ -1,5 +1,6 @@
 package com.edson.springdesktop.domain.model.orderItem;
 
+import com.edson.springdesktop.domain.model.Order;
 import com.edson.springdesktop.domain.model.Product;
 import com.edson.springdesktop.service.enums.TransactionType;
 import jakarta.persistence.*;
@@ -38,6 +39,10 @@ public class OrderItem {
     @Enumerated(EnumType.STRING)
     @NotNull(message = "O tipo de transação não pode ser nulo")
     private TransactionType transactionType;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public OrderItem() {
     }
@@ -92,5 +97,13 @@ public class OrderItem {
 
     public Map<String, Object> getTransactionTypeInfo() {
         return transactionType != null ? transactionType.getInfo() : null;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }
