@@ -16,16 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edson.springdesktop.domain.model.orderItem.ConvertToOrderItem;
 import com.edson.springdesktop.domain.model.orderItem.OrderItem;
 import com.edson.springdesktop.domain.model.orderItem.SaveOrderItemDTO;
 import com.edson.springdesktop.service.OrderItemService;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.persistence.Enumerated;
-import jakarta.validation.Valid; 
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/order-items")
@@ -54,7 +49,8 @@ public class OrderItemController {
     
     @PostMapping
     public ResponseEntity<OrderItem> save(@RequestBody @Valid SaveOrderItemDTO orderItemDTO) {
-        OrderItem savedOrderItem = orderItemService.save(ConvertToOrderItem.convertToOrderItem(orderItemDTO));
+//        ConvertToOrderItem.convertToOrderItem(orderItemDTO)
+        OrderItem savedOrderItem = orderItemService.save(orderItemDTO.convertToOrderItem());
         return new ResponseEntity<>(savedOrderItem, HttpStatus.CREATED);
     }
 
