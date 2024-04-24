@@ -29,7 +29,7 @@ public class Order {
   private Date issueDate;
 
 
-  @OneToMany
+  @OneToMany(mappedBy = "order")
   private List<OrderItem> orderItems;
 
   @ManyToOne
