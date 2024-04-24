@@ -38,6 +38,8 @@ public class Order {
   @ManyToOne
   private Client client;
 
+    private String driver;
+
   public Order() {}
 
   public Long getId() {
@@ -103,5 +105,12 @@ public class Order {
   public void setOperationNature(String operationNature) {
     this.operationNature = operationNature;
   }
-  
+
+    public String getDriver() {
+        return driver;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
 }

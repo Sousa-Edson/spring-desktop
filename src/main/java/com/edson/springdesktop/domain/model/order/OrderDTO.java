@@ -17,7 +17,8 @@ public record OrderDTO(
         List<OrderItem> orderItems,
         Client client,
         int itemCount,
-        BigDecimal totalValue
+        BigDecimal totalValue,
+        String driver
 ) {
     // Método estático para converter de Order para OrderDTO
     public static OrderDTO fromOrder(Order order) {
@@ -36,7 +37,8 @@ public record OrderDTO(
                 order.getOrderItems(),
                 order.getClient(),
                 itemCount,
-                totalValue
+                totalValue,
+                order.getDriver()
         );
     }
 }
