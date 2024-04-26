@@ -7,16 +7,16 @@ public enum TransactionType {
     PEDIDO_COMPRAS(0, "Pedido de Compras"),
     PEDIDO_VENDAS(1, "Pedido de Vendas");
 
-    private final int id;
+    private final int type;
     private final String displayName;
 
-    TransactionType(int id, String displayName) {
-        this.id = id;
+    TransactionType(int type, String displayName) {
+        this.type = type;
         this.displayName = displayName;
     }
 
     public int getId() {
-        return id;
+        return type;
     }
 
     public String getDisplayName() {
@@ -24,7 +24,7 @@ public enum TransactionType {
     }
     public Map<String, Object> getInfo() {
         Map<String, Object> info = new LinkedHashMap<>();
-        info.put("id", this.id);
+        info.put("type", this.type);
         info.put("transactionType", this.name());
         info.put("displayName", this.displayName);
         return info;
