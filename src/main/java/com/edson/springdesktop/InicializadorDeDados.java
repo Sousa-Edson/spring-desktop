@@ -1,9 +1,9 @@
 package com.edson.springdesktop;
 
 
-import com.edson.springdesktop.domain.model.Address;
-import com.edson.springdesktop.domain.model.Client;
-import com.edson.springdesktop.domain.model.Product; 
+import com.edson.springdesktop.domain.entity.client.Address;
+import com.edson.springdesktop.domain.entity.client.Client;
+import com.edson.springdesktop.domain.entity.product.Product;
 import com.edson.springdesktop.domain.repository.ClientRepository;
 import com.edson.springdesktop.domain.repository.ProductRepository;
 
@@ -12,8 +12,6 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
 
 @Component
 public class InicializadorDeDados implements CommandLineRunner {

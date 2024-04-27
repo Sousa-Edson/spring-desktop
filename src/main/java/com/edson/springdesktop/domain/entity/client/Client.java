@@ -1,4 +1,4 @@
-package com.edson.springdesktop.domain.model;
+package com.edson.springdesktop.domain.entity.client;
 
 import jakarta.persistence.*;
 

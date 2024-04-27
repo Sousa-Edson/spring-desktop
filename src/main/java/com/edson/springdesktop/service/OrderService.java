@@ -2,13 +2,11 @@ package com.edson.springdesktop.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import com.edson.springdesktop.domain.model.order.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.edson.springdesktop.domain.model.order.Order;
+import com.edson.springdesktop.domain.entity.order.Order;
 import com.edson.springdesktop.domain.repository.OrderRepository;
 
 

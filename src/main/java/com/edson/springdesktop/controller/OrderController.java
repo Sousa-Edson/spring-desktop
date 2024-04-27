@@ -1,7 +1,7 @@
 package com.edson.springdesktop.controller;
 
-import com.edson.springdesktop.domain.model.order.Order;
-import com.edson.springdesktop.domain.model.order.OrderDTO;
+import com.edson.springdesktop.domain.entity.order.Order;
+import com.edson.springdesktop.domain.entity.order.OrderDTO;
 import com.edson.springdesktop.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

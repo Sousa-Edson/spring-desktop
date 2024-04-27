@@ -1,6 +1,6 @@
 package com.edson.springdesktop.controller;
 
-import com.edson.springdesktop.domain.model.Client;
+import com.edson.springdesktop.domain.entity.client.Client;
 import com.edson.springdesktop.service.ClientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

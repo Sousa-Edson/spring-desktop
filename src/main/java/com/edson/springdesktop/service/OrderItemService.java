@@ -1,6 +1,6 @@
 package com.edson.springdesktop.service;
 
-import com.edson.springdesktop.domain.model.orderItem.OrderItem;
+import com.edson.springdesktop.domain.entity.orderItem.OrderItem;
 import com.edson.springdesktop.domain.repository.OrderItemRepository;
 import java.math.BigDecimal;
 import java.util.List;

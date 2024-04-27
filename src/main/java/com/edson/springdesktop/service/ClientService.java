@@ -1,7 +1,7 @@
 package com.edson.springdesktop.service;
 
 
-import com.edson.springdesktop.domain.model.Client;
+import com.edson.springdesktop.domain.entity.client.Client;
 import com.edson.springdesktop.domain.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

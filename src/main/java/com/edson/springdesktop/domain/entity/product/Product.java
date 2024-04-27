@@ -1,4 +1,4 @@
-package com.edson.springdesktop.domain.model;
+package com.edson.springdesktop.domain.entity.product;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

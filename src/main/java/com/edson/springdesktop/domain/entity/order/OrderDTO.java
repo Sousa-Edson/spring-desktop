@@ -1,7 +1,7 @@
-package com.edson.springdesktop.domain.model.order;
+package com.edson.springdesktop.domain.entity.order;
 
-import com.edson.springdesktop.domain.model.Client;
-import com.edson.springdesktop.domain.model.orderItem.OrderItem;
+import com.edson.springdesktop.domain.entity.client.Client;
+import com.edson.springdesktop.domain.entity.orderItem.OrderItem;
 
 import java.math.BigDecimal;
 import java.util.Date;

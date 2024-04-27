@@ -1,10 +1,10 @@
 package com.edson.springdesktop.service;
 
-import com.edson.springdesktop.domain.model.Product;
+import com.edson.springdesktop.domain.entity.product.Product;
 import com.edson.springdesktop.domain.repository.ProductRepository;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

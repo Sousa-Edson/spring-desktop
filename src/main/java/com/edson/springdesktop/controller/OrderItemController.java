@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edson.springdesktop.domain.model.orderItem.OrderItem;
-import com.edson.springdesktop.domain.model.orderItem.SaveOrderItemDTO;
+import com.edson.springdesktop.domain.entity.orderItem.OrderItem;
+import com.edson.springdesktop.domain.entity.orderItem.SaveOrderItemDTO;
 import com.edson.springdesktop.service.OrderItemService;
 
 import jakarta.validation.Valid;

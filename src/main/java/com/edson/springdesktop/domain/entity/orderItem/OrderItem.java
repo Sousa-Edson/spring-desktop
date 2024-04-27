@@ -1,7 +1,7 @@
-package com.edson.springdesktop.domain.model.orderItem;
+package com.edson.springdesktop.domain.entity.orderItem;
 
-import com.edson.springdesktop.domain.model.order.Order;
-import com.edson.springdesktop.domain.model.Product;
+import com.edson.springdesktop.domain.entity.order.Order;
+import com.edson.springdesktop.domain.entity.product.Product;
 import com.edson.springdesktop.service.enums.TransactionType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
