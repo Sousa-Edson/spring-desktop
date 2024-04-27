@@ -36,6 +36,8 @@ public class Product {
     @NotNull(message = "O preço não pode ser nulo")
     private BigDecimal unitPrice;
 
+    private Boolean active = true;
+
 
     public Product() {
     }
@@ -94,5 +96,13 @@ public class Product {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional; 
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
@@ -33,28 +33,29 @@ public class ProductController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado para o ID: " + id);
         }
-    } 
+    }
 
     @GetMapping("/description/{description}")
     public ResponseEntity<List<Product>> findByDescriptionContaining(@PathVariable String description) {
-        List<Product> Products  = productService.findByDescriptionContaining(description);
-        System.out.println("A BUSCA RETORNA::: "+Products);
+        List<Product> Products = productService.findByDescriptionContaining(description);
+        System.out.println("A BUSCA RETORNA::: " + Products);
         return ResponseEntity.ok(Products);
     }
 
     @PostMapping
-    public ResponseEntity<Product> save(@RequestBody  @Valid Product Product) {
+    public ResponseEntity<Product> save(@RequestBody @Valid Product Product) {
         Product savedProduct = productService.save(Product);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product Product) {
+    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product product) {
         if (!productService.findById(id).isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        Product.setId(id);
-        Product updatedProduct = productService.save(Product);
+        Product existingProduct = productService.findById(id).get();
+        existingProduct.setActive(product.getActive());
+        Product updatedProduct = productService.save(existingProduct);
         return ResponseEntity.ok(updatedProduct);
     }
 
