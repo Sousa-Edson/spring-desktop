@@ -1,6 +1,7 @@
 package com.edson.springdesktop.controller;
 
 import com.edson.springdesktop.domain.entity.product.Product;
+import com.edson.springdesktop.domain.entity.product.ProductDTO;
 import com.edson.springdesktop.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/products")
@@ -19,9 +21,12 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll() {
-        List<Product> Products = productService.findAll();
-        return ResponseEntity.ok(Products);
+    public ResponseEntity<List<ProductDTO>> findAll() {
+        List<Product> products = productService.findAll();
+        List<ProductDTO> productDTOs = products.stream()
+                .map(ProductDTO::fromProduct)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(productDTOs);
     }
 
     @GetMapping("/{id}")
@@ -29,34 +34,51 @@ public class ProductController {
         Optional<Product> productOptional = productService.findById(id);
 
         if (productOptional.isPresent()) {
-            return ResponseEntity.ok(productOptional.get());
+            ProductDTO productDTO = ProductDTO.fromProduct(productOptional.get());
+            return ResponseEntity.ok(productDTO);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado para o ID: " + id);
         }
     }
 
     @GetMapping("/description/{description}")
-    public ResponseEntity<List<Product>> findByDescriptionContaining(@PathVariable String description) {
-        List<Product> Products = productService.findByDescriptionContaining(description);
-        System.out.println("A BUSCA RETORNA::: " + Products);
-        return ResponseEntity.ok(Products);
+    public ResponseEntity<List<ProductDTO>> findByDescriptionContaining(@PathVariable String description) {
+        List<Product> products = productService.findByDescriptionContaining(description);
+
+        // Converte a lista de produtos em uma lista de DTOs e retorna na resposta
+        List<ProductDTO> productDTOs = products.stream()
+                .map(ProductDTO::fromProduct)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(productDTOs);
     }
 
     @PostMapping
-    public ResponseEntity<Product> save(@RequestBody @Valid Product Product) {
-        Product savedProduct = productService.save(Product);
+    public ResponseEntity<Product> save(@RequestBody @Valid ProductDTO product) {
+        Product savedProduct = productService.save(product.convertToProduct());
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product product) {
-        if (!productService.findById(id).isPresent()) {
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+        Optional<Product> existingProductOptional = productService.findById(id);
+
+        if (existingProductOptional.isPresent()) {
+            Product existingProduct = existingProductOptional.get();
+
+            // Atualiza os campos do produto existente com os valores do DTO
+            existingProduct = productDTO.convertToProduct();
+            existingProduct.setId(id);
+
+            // Salva o produto atualizado
+            Product updatedProduct = productService.save(existingProduct);
+
+            // Converte o produto atualizado em DTO e retorna na resposta
+            ProductDTO updatedProductDTO = ProductDTO.fromProduct(updatedProduct);
+            return ResponseEntity.ok(updatedProductDTO);
+        } else {
             return ResponseEntity.notFound().build();
         }
-        Product existingProduct = productService.findById(id).get();
-        existingProduct.setActive(product.getActive());
-        Product updatedProduct = productService.save(existingProduct);
-        return ResponseEntity.ok(updatedProduct);
     }
 
     @DeleteMapping("/{id}")

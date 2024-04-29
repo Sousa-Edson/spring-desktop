@@ -39,7 +39,7 @@ public class InicializadorDeDados implements CommandLineRunner {
                 produto2.setDescription("Produto " + i);
                 produto2.setUnit("UN");
                 produto2.setUnitPrice(new BigDecimal(12.7588 + (i * 50.7895)));
-                produto2.setNCM("87654321");
+                produto2.setNcm("87654321");
                 productRepository.save(produto2);
             }
         }

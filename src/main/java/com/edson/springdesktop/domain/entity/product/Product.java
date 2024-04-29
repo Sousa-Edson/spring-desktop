@@ -25,7 +25,7 @@ public class Product {
 
     @NotBlank(message = "O ncm não pode estar em branco")
     @Size(min = 8, max = 8, message = "O ncm deve ter 8 caracteres")
-    private String NCM;
+    private String ncm;
 
 
     @NotBlank(message = "A unidade não pode estar em branco")
@@ -60,14 +60,13 @@ public class Product {
         this.description = description;
     }
 
-    public String getNCM() {
-        return NCM;
+    public String getNcm() {
+        return ncm;
     }
 
-    public void setNCM(String NCM) {
-        this.NCM = NCM;
+    public void setNcm(String ncm) {
+        this.ncm = ncm;
     }
-
 
     public String getUnit() {
         return unit;
