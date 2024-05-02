@@ -20,13 +20,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-
-//    @GetMapping
-//    public ResponseEntity<List<Order>> findAll() {
-//        List<Order> orders = orderService.findAll();
-//        return ResponseEntity.ok(orders);
-//    }
-
     @GetMapping
     public ResponseEntity<List<OrderDTO>> findAll() {
         List<Order> orders = orderService.findAll();
@@ -49,8 +42,8 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<Order> save(@RequestBody @Valid Order order) {
-        Order savedOrder = orderService.save(order);
+    public ResponseEntity<Order> save(@RequestBody @Valid OrderDTO order) {
+        Order savedOrder = orderService.save(order.toOrder(order));
         return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
     }
 

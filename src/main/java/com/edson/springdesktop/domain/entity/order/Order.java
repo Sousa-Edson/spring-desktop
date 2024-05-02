@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -27,7 +27,9 @@ public class Order {
 
   private String additionalInformation;
 
-  private Date issueDate;
+  private Date invoiceDateTime;
+
+  private Date recordDate;
 
   @Column(name = "naturezaOperacao")
   private String operationNature;
@@ -38,9 +40,31 @@ public class Order {
   @ManyToOne
   private Client client;
 
-    private String driver;
+  private String driver;
 
   public Order() {}
+
+  public Order(
+    Long id,
+    String noteNumber,
+    String noteKey,
+    String additionalInformation,
+    Date invoiceDateTime,
+    String operationNature,
+    List<OrderItem> orderItems,
+    Client client,
+    String driver
+  ) {
+    this.id = id;
+    this.noteNumber = noteNumber;
+    this.noteKey = noteKey;
+    this.additionalInformation = additionalInformation;
+    this.invoiceDateTime = invoiceDateTime;
+    this.operationNature = operationNature;
+    this.orderItems = orderItems;
+    this.client = client;
+    this.driver = driver;
+  }
 
   public Long getId() {
     return id;
@@ -90,13 +114,7 @@ public class Order {
     this.additionalInformation = additionalInformation;
   }
 
-  public Date getIssueDate() {
-    return issueDate;
-  }
-
-  public void setIssueDate(Date issueDate) {
-    this.issueDate = issueDate;
-  }
+ 
 
   public String getOperationNature() {
     return operationNature;
@@ -106,11 +124,27 @@ public class Order {
     this.operationNature = operationNature;
   }
 
-    public String getDriver() {
-        return driver;
-    }
+  public String getDriver() {
+    return driver;
+  }
 
-    public void setDriver(String driver) {
-        this.driver = driver;
-    }
+  public void setDriver(String driver) {
+    this.driver = driver;
+  }
+
+  public Date getRecordDate() {
+    return recordDate;
+  }
+
+  public void setRecordDate(Date recordDate) {
+    this.recordDate = recordDate;
+  }
+
+  public Date getInvoiceDateTime() {
+    return invoiceDateTime;
+  }
+
+  public void setInvoiceDateTime(Date invoiceDateTime) {
+    this.invoiceDateTime = invoiceDateTime;
+  }
 }
