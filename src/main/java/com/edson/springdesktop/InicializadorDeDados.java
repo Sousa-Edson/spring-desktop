@@ -1,10 +1,9 @@
 package com.edson.springdesktop;
 
-
-import com.edson.springdesktop.domain.entity.client.Address;
-import com.edson.springdesktop.domain.entity.client.Client;
+import com.edson.springdesktop.domain.entity.cliente.Cliente;
+import com.edson.springdesktop.domain.entity.cliente.Endereco;
 import com.edson.springdesktop.domain.entity.product.Product;
-import com.edson.springdesktop.domain.repository.ClientRepository;
+import com.edson.springdesktop.domain.repository.ClienteRepository;
 import com.edson.springdesktop.domain.repository.ProductRepository;
 
 import java.math.BigDecimal;
@@ -18,15 +17,15 @@ public class InicializadorDeDados implements CommandLineRunner {
 
 
     private final ProductRepository productRepository;
-    private final ClientRepository clientRepository;    
+    private final ClienteRepository clienteRepository;    
 
     @Autowired
     public InicializadorDeDados(
             ProductRepository productRepository,
-            ClientRepository clientRepository 
+            ClienteRepository clienteRepository 
     ) {
         this.productRepository = productRepository;
-        this.clientRepository = clientRepository; 
+        this.clienteRepository = clienteRepository; 
     }
 
     @Override
@@ -43,26 +42,26 @@ public class InicializadorDeDados implements CommandLineRunner {
                 productRepository.save(produto2);
             }
         }
-  // Criar um objeto Address
-  Address address = new Address();
-  address.setStreet("123 Main St");
-  address.setNeighborhood("Downtown");
-  address.setCity("Cityville");
-  address.setState("State");
-  address.setZipCode("12345-678");
+  // Criar um objeto Endereco
+  Endereco endereco = new Endereco();
+  endereco.setLogradouro("123 Rua Principal");
+  endereco.setBairro("Centro");
+  endereco.setCidade("Cidade");
+  endereco.setEstado("Estado");
+  endereco.setCep("12345-678");
   
 
-  // Criar um objeto Client
-  Client client = new Client();
-  client.setCnpj("11111111111");
-  client.setName("Fulano"); 
-  client.setStateRegistration("623061758112");
-  client.setPhone("011 4168-3085");
+  // Criar um objeto Cliente
+  Cliente cliente = new Cliente();
+  cliente.setCnpj("11111111111");
+  cliente.setNome("Fulano"); 
+  cliente.setInscricaoEstadual("623061758112");
+  cliente.setTelefone("011 4168-3085");
   
-  client.setAddress(address); // Atribuir o endereço ao cliente
+  cliente.setEndereco(endereco); // Atribuir o endereco ao cliente
 
   // Salvar o cliente no banco de dados
-  clientRepository.save(client);
+  clienteRepository.save(cliente);
 
 
         

@@ -1,6 +1,6 @@
 package com.edson.springdesktop.domain.entity.order;
-
-import com.edson.springdesktop.domain.entity.client.Client;
+ 
+import com.edson.springdesktop.domain.entity.cliente.Cliente;
 import com.edson.springdesktop.domain.entity.orderItem.OrderItem;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,7 +38,7 @@ public class Order {
   private List<OrderItem> orderItems;
 
   @ManyToOne
-  private Client client;
+  private Cliente cliente;
 
   private String driver;
 
@@ -52,7 +52,7 @@ public class Order {
     Date invoiceDateTime,
     String operationNature,
     List<OrderItem> orderItems,
-    Client client,
+    Cliente cliente,
     String driver
   ) {
     this.id = id;
@@ -62,7 +62,7 @@ public class Order {
     this.invoiceDateTime = invoiceDateTime;
     this.operationNature = operationNature;
     this.orderItems = orderItems;
-    this.client = client;
+    this.cliente = cliente;
     this.driver = driver;
   }
 
@@ -72,22 +72,6 @@ public class Order {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public List<OrderItem> getOrderItems() {
-    return orderItems;
-  }
-
-  public void setOrderItems(List<OrderItem> orderItems) {
-    this.orderItems = orderItems;
-  }
-
-  public Client getClient() {
-    return client;
-  }
-
-  public void setClient(Client client) {
-    this.client = client;
   }
 
   public String getNoteNumber() {
@@ -114,22 +98,12 @@ public class Order {
     this.additionalInformation = additionalInformation;
   }
 
- 
-
-  public String getOperationNature() {
-    return operationNature;
+  public Date getInvoiceDateTime() {
+    return invoiceDateTime;
   }
 
-  public void setOperationNature(String operationNature) {
-    this.operationNature = operationNature;
-  }
-
-  public String getDriver() {
-    return driver;
-  }
-
-  public void setDriver(String driver) {
-    this.driver = driver;
+  public void setInvoiceDateTime(Date invoiceDateTime) {
+    this.invoiceDateTime = invoiceDateTime;
   }
 
   public Date getRecordDate() {
@@ -140,11 +114,35 @@ public class Order {
     this.recordDate = recordDate;
   }
 
-  public Date getInvoiceDateTime() {
-    return invoiceDateTime;
+  public String getOperationNature() {
+    return operationNature;
   }
 
-  public void setInvoiceDateTime(Date invoiceDateTime) {
-    this.invoiceDateTime = invoiceDateTime;
+  public void setOperationNature(String operationNature) {
+    this.operationNature = operationNature;
+  }
+
+  public List<OrderItem> getOrderItems() {
+    return orderItems;
+  }
+
+  public void setOrderItems(List<OrderItem> orderItems) {
+    this.orderItems = orderItems;
+  }
+
+  public Cliente getCliente() {
+    return cliente;
+  }
+
+  public void setCliente(Cliente cliente) {
+    this.cliente = cliente;
+  }
+
+  public String getDriver() {
+    return driver;
+  }
+
+  public void setDriver(String driver) {
+    this.driver = driver;
   }
 }

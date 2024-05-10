@@ -1,6 +1,6 @@
 package com.edson.springdesktop.domain.entity.order;
-
-import com.edson.springdesktop.domain.entity.client.Client;
+ 
+import com.edson.springdesktop.domain.entity.cliente.Cliente;
 import com.edson.springdesktop.domain.entity.orderItem.OrderItem;
 
 import java.math.BigDecimal;
@@ -14,7 +14,7 @@ public record OrderDTO(
         Date invoiceDateTime,
         String operationNature,
         List<OrderItem> orderItems,
-        Client client,
+        Cliente cliente,
         String driver,
         int itemCount,
         BigDecimal totalValue
@@ -34,7 +34,7 @@ public record OrderDTO(
                 order.getInvoiceDateTime(),
                 order.getOperationNature(),
                 order.getOrderItems(),
-                order.getClient(),
+                order.getCliente(),
                 order.getDriver(),
                 itemCount,
                 totalValue
@@ -51,7 +51,7 @@ public record OrderDTO(
                 orderDTO.invoiceDateTime,
                 orderDTO.operationNature,
                 orderDTO.orderItems,
-                orderDTO.client,
+                orderDTO.cliente,
                 orderDTO.driver
         );
     }
