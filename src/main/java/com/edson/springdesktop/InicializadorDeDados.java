@@ -2,7 +2,7 @@ package com.edson.springdesktop;
 
 import com.edson.springdesktop.domain.entity.cliente.Cliente;
 import com.edson.springdesktop.domain.entity.cliente.Endereco;
-import com.edson.springdesktop.domain.entity.product.Product;
+import com.edson.springdesktop.domain.entity.produto.Produto;
 import com.edson.springdesktop.domain.repository.ClienteRepository;
 import com.edson.springdesktop.domain.repository.ProductRepository;
 
@@ -33,7 +33,7 @@ public class InicializadorDeDados implements CommandLineRunner {
         // Verifica se a tabela de produtos está vazia
         if (productRepository.count() == 0) {
             for (int i = 0; i < 10; i++) {
-                Product produto2 = new Product();
+                Produto produto2 = new Produto();
                 produto2.setProductCode("CODE " + i);
                 produto2.setDescription("Produto " + i);
                 produto2.setUnit("UN");

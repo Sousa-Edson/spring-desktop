@@ -1,7 +1,7 @@
 package com.edson.springdesktop.domain.entity.orderItem;
 
 import com.edson.springdesktop.domain.entity.order.Order;
-import com.edson.springdesktop.domain.entity.product.Product;
+import com.edson.springdesktop.domain.entity.produto.Produto;
 import com.edson.springdesktop.service.enums.TransactionType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,7 +22,7 @@ public class OrderItem {
   private Long id;
 
   @ManyToOne
-  private Product product;
+  private Produto product;
 
   @NotBlank(message = "O cfop não pode estar em branco")
   @Size(min = 4, max = 4, message = "O cfop deve ter 4 caracteres")
@@ -48,11 +48,11 @@ public class OrderItem {
 
   public OrderItem() {}
 
-  public Product getProduct() {
+  public Produto getProduct() {
     return product;
   }
 
-  public void setProduct(Product product) {
+  public void setProduct(Produto product) {
     this.product = product;
   }
 

@@ -15,7 +15,7 @@ public class OrderItemService {
   private OrderItemRepository orderItemRepository;
 
   @Autowired
-  private ProductService productService;
+  private ProdutoService productService;
 
 
   public List<OrderItem> findAll() {
@@ -31,7 +31,7 @@ public class OrderItemService {
     orderItem.setProduct(productService.findById(orderItem.getProduct().getId()).get());
 
     BigDecimal quantity = orderItem.getQuantity(); 
-    BigDecimal unitPrice = orderItem.getProduct().getUnitPrice();
+    BigDecimal unitPrice = orderItem.getProduct().getPrecoUnitario();
     BigDecimal totalValue = quantity.multiply(unitPrice);
     
     orderItem.setTotalValue(totalValue);

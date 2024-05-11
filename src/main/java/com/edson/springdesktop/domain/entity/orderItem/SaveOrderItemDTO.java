@@ -1,7 +1,7 @@
 package com.edson.springdesktop.domain.entity.orderItem;
 
 import com.edson.springdesktop.domain.entity.order.Order;
-import com.edson.springdesktop.domain.entity.product.Product;
+import com.edson.springdesktop.domain.entity.produto.Produto;
 import com.edson.springdesktop.service.enums.TransactionType;
 
 import jakarta.validation.constraints.NotBlank;
@@ -27,7 +27,7 @@ public record SaveOrderItemDTO(
         OrderItem orderItem = new OrderItem();
 
         // Definindo o produto
-        Product product = new Product();
+        Produto product = new Produto();
         product.setId(productId());
         orderItem.setProduct(product);
 
