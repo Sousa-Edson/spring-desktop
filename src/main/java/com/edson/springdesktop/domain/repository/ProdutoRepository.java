@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.edson.springdesktop.domain.entity.produto.Produto;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Produto, Long> {
-  List<Produto> findByDescriptionContaining(String description);
+public interface ProdutoRepository extends JpaRepository<Produto, Long> {
+  List<Produto> findByDescricaoContaining(String descricao);
 }

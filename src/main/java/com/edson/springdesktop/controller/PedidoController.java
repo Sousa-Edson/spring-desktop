@@ -1,8 +1,8 @@
 package com.edson.springdesktop.controller;
 
-import com.edson.springdesktop.domain.entity.order.Order;
-import com.edson.springdesktop.domain.entity.order.OrderDTO;
-import com.edson.springdesktop.service.OrderService;
+import com.edson.springdesktop.domain.entity.pedido.Pedido;
+import com.edson.springdesktop.domain.entity.pedido.PedidoDTO; 
+import com.edson.springdesktop.service.PedidoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,55 +14,55 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/orders")
-public class OrderController {
+@RequestMapping("/api/pedidos")
+public class PedidoController {
 
     @Autowired
-    private OrderService orderService;
+    private PedidoService pedidoService;
 
     @GetMapping
-    public ResponseEntity<List<OrderDTO>> findAll() {
-        List<Order> orders = orderService.findAll();
-        List<OrderDTO> orderDTOs = orders.stream()
-                .map(OrderDTO::fromOrder)
+    public ResponseEntity<List<PedidoDTO>> findAll() {
+        List<Pedido> orders = pedidoService.findAll();
+        List<PedidoDTO> pedidoDTOs = orders.stream()
+                .map(PedidoDTO::fromPedido)
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(orderDTOs);
+        return ResponseEntity.ok(pedidoDTOs);
     }
 
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
-        Optional<Order> orderOptional = orderService.findById(id);
+        Optional<Pedido> pedidoOptional = pedidoService.findById(id);
 
-        if (orderOptional.isPresent()) {
-            return ResponseEntity.ok(orderOptional.get());
+        if (pedidoOptional.isPresent()) {
+            return ResponseEntity.ok(pedidoOptional.get());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido não encontrado para o ID: " + id);
         }
     }
 
     @PostMapping
-    public ResponseEntity<Order> save(@RequestBody @Valid OrderDTO order) {
-        Order savedOrder = orderService.save(order.toOrder(order));
+    public ResponseEntity<Pedido> save(@RequestBody @Valid PedidoDTO order) {
+        Pedido savedOrder = pedidoService.save(order.toPedido(order));
         return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Order> update(@PathVariable Long id, @RequestBody Order order) {
-        if (!orderService.findById(id).isPresent()) {
+    public ResponseEntity<Pedido> update(@PathVariable Long id, @RequestBody Pedido order) {
+        if (!pedidoService.findById(id).isPresent()) {
             return ResponseEntity.notFound().build();
         }
         order.setId(id);
-        Order updatedOrder = orderService.save(order);
+        Pedido updatedOrder = pedidoService.save(order);
         return ResponseEntity.ok(updatedOrder);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (!orderService.findById(id).isPresent()) {
+        if (!pedidoService.findById(id).isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        orderService.deleteById(id);
+        pedidoService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
