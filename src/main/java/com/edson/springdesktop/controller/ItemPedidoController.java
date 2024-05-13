@@ -1,7 +1,7 @@
 package com.edson.springdesktop.controller;
 
 import com.edson.springdesktop.domain.entity.itemPedido.ItemPedido;
-import com.edson.springdesktop.domain.entity.itemPedido.SalvarItemPedidoDTO;
+import com.edson.springdesktop.domain.entity.itemPedido.ItemPedidoDTO;
 import com.edson.springdesktop.service.ItemPedidoService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -46,7 +46,7 @@ public class ItemPedidoController {
 
   @PostMapping
   public ResponseEntity<ItemPedido> save(
-    @RequestBody @Valid SalvarItemPedidoDTO orderItemDTO
+          @RequestBody @Valid ItemPedidoDTO orderItemDTO
   ) {
     //        ConvertToItemPedido.convertToItemPedido(orderItemDTO)
     ItemPedido savedItemPedido = itemPedidoService.save(

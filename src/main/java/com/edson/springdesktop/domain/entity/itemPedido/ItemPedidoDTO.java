@@ -11,7 +11,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
 
-public record SalvarItemPedidoDTO(
+public record ItemPedidoDTO(
         @NotNull(message = "O ID do produto não pode ser nulo") Long idProduto,
         @NotBlank(message = "O CFOP não pode estar em branco") String CFOP,
         @PositiveOrZero(message = "A quantidade deve ser um número positivo ou zero")
