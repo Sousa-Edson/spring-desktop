@@ -27,9 +27,10 @@ public class Pedido {
 
   private String chaveNota;
 
+  @Column(length = 1000,columnDefinition = "TEXT")
   private String informacaoAdicional;
 
-  private Date dataHoraFaturamento;
+  private Date dataHoraTransacao;
 
   private Date dataRegistro;
 
@@ -51,7 +52,7 @@ public class Pedido {
     String numeroNota,
     String chaveNota,
     String informacaoAdicional,
-    Date dataHoraFaturamento,
+    Date dataHoraTransacao,
     String naturezaOperacao,
     List<ItemPedido> itensPedido,
     Cliente cliente,
@@ -61,7 +62,7 @@ public class Pedido {
     this.numeroNota = numeroNota;
     this.chaveNota = chaveNota;
     this.informacaoAdicional = informacaoAdicional;
-    this.dataHoraFaturamento = dataHoraFaturamento;
+    this.dataHoraTransacao = dataHoraTransacao;
     this.naturezaOperacao = naturezaOperacao;
     this.itensPedido = itensPedido;
     this.cliente = cliente;
@@ -100,13 +101,7 @@ public class Pedido {
     this.informacaoAdicional = informacaoAdicional;
   }
 
-  public Date getDataHoraFaturamento() {
-    return dataHoraFaturamento;
-  }
-
-  public void setDataHoraFaturamento(Date dataHoraFaturamento) {
-    this.dataHoraFaturamento = dataHoraFaturamento;
-  }
+ 
 
   public Date getDataRegistro() {
     return dataRegistro;
@@ -146,5 +141,13 @@ public class Pedido {
 
   public void setMotorista(String motorista) {
     this.motorista = motorista;
+  }
+
+  public Date getDataHoraTransacao() {
+    return dataHoraTransacao;
+  }
+
+  public void setDataHoraTransacao(Date dataHoraTransacao) {
+    this.dataHoraTransacao = dataHoraTransacao;
   }
 }
