@@ -2,9 +2,13 @@ package com.edson.springdesktop.controller;
 
 import com.edson.springdesktop.domain.entity.produto.Produto;
 import com.edson.springdesktop.domain.entity.produto.ProdutoDTO;
+import com.edson.springdesktop.domain.entity.produto.ProdutoPageDTO;
 import com.edson.springdesktop.service.ProdutoService;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +27,18 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @GetMapping
-    public ResponseEntity<List<ProdutoDTO>> findAll() {
-        List<Produto> produtos = produtoService.findAll();
-        List<ProdutoDTO> produtoDTOs = produtos.stream()
-                .map(ProdutoDTO::fromProduto)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(produtoDTOs);
+    public ProdutoPageDTO list(@RequestParam(defaultValue = "0") @PositiveOrZero int page,
+                               @RequestParam(defaultValue = "10") @Positive @Max(100) int pageSize) {
+        return produtoService.list(page, pageSize);
     }
+//    @GetMapping
+//    public ResponseEntity<List<ProdutoDTO>> findAll() {
+//        List<Produto> produtos = produtoService.findAll();
+//        List<ProdutoDTO> produtoDTOs = produtos.stream()
+//                .map(ProdutoDTO::fromProduto)
+//                .collect(Collectors.toList());
+//        return ResponseEntity.ok(produtoDTOs);
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
