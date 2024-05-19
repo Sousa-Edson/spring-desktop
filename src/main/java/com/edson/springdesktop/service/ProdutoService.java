@@ -14,6 +14,8 @@ import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,9 +44,17 @@ public class ProdutoService {
     return produtoRepository.findByDescricaoContaining(descricao);
   }
 
+//  public ProdutoPageDTO list(@PositiveOrZero int page, @Positive @Max(100) int pageSize) {
+//    Page<Produto> pageProdutos = produtoRepository.findAll(PageRequest.of(page, pageSize));
+//    List<ProdutoDTO> courses = pageProdutos.get().map(p -> ProdutoDTO.fromProduto(p)).collect(Collectors.toList());
+//    return new ProdutoPageDTO(courses, pageProdutos.getTotalElements(), pageProdutos.getTotalPages());
+//  }
+
   public ProdutoPageDTO list(@PositiveOrZero int page, @Positive @Max(100) int pageSize) {
-    Page<Produto> pageProdutos = produtoRepository.findAll(PageRequest.of(page, pageSize));
-    List<ProdutoDTO> courses = pageProdutos.get().map(p -> ProdutoDTO.fromProduto(p)).collect(Collectors.toList());
-    return new ProdutoPageDTO(courses, pageProdutos.getTotalElements(), pageProdutos.getTotalPages());
+    Pageable pageable = PageRequest.of(page, pageSize, Sort.by("id").descending());
+    Page<Produto> pageProdutos = produtoRepository.findAll(pageable);
+    List<ProdutoDTO> produtos = pageProdutos.get().map(p -> ProdutoDTO.fromProduto(p)).collect(Collectors.toList());
+    return new ProdutoPageDTO(produtos, pageProdutos.getTotalElements(), pageProdutos.getTotalPages());
   }
+
 }
