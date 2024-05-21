@@ -43,7 +43,7 @@ public class Produto {
   private String unidade;
 
   @NotNull(message = "O preço não pode ser nulo")
-  @Column(precision = 10, scale = 4)
+  @Column(precision = 15, scale = 4)
   private BigDecimal precoUnitario;
  
   private Boolean ativo = true;
