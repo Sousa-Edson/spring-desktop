@@ -32,8 +32,10 @@ public class ProdutoService {
     return produtoRepository.findById(id);
   }
 
-  public Produto save(Produto Product) {
-    return produtoRepository.save(Product);
+  public Produto save(Produto product) {
+    product.setDescricao(product.getDescricao().toUpperCase());
+    product.setCodigoProduto(product.getCodigoProduto().toUpperCase());
+    return produtoRepository.save(product);
   }
 
   public void deleteById(Long id) {
