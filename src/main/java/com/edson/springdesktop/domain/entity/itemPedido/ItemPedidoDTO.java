@@ -1,7 +1,8 @@
 package com.edson.springdesktop.domain.entity.itemPedido;
- 
+
 import com.edson.springdesktop.domain.entity.pedido.Pedido;
 import com.edson.springdesktop.domain.entity.produto.Produto;
+import com.edson.springdesktop.domain.entity.produto.ProdutoDTO;
 import com.edson.springdesktop.service.enums.TipoTransacao;
 
 import jakarta.validation.constraints.NotBlank;
@@ -19,6 +20,8 @@ public record ItemPedidoDTO(
         @NotNull(message = "O tipo de transação não pode ser nulo") TipoTransacao tipoTransacao,
         Pedido pedido
 ) {
+
+
     public String nomeExibicaoTipoTransacao() {
         return tipoTransacao.getNomeExibicao();
     }
@@ -40,5 +43,15 @@ public record ItemPedidoDTO(
         itemPedido.setPedido(pedido());
 
         return itemPedido;
+    }
+
+    public static ItemPedidoDTO fromItem(ItemPedido item) {
+        return new ItemPedidoDTO(
+                item.getId(),
+                item.getCFOP(),
+                item.getQuantidade(),
+                item.getTipoTransacao(),
+                item.getPedido()
+        );
     }
 }
