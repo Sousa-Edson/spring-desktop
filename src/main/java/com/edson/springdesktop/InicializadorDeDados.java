@@ -108,7 +108,7 @@ public class InicializadorDeDados implements CommandLineRunner {
 
     private Produto criarProduto(String descricao, String codigo, String ncm, String unidade, BigDecimal precoUnitario) {
         Produto produto = new Produto();
-        produto.setDescricao(descricao);
+        produto.setDescricao(descricao.toUpperCase());
         produto.setCodigoProduto(codigo);
         produto.setNcm(ncm);
         produto.setUnidade(unidade);
